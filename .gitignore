@@ -1,2 +1,5 @@
 .sass-cache/
 *.css.map
+api_key.js
+main.css
+node_modules
