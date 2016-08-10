@@ -1,33 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<meta property="og:title" content="">
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="">
-	<meta property="og:image" content="">
-	<meta property="og:site_name" content="">
-	<meta property="og:description" content="">
-	<title>ADL - Productions!</title>
-	<!-- <link rel="icon" type="image/png" href=""> -->
-	<!-- STYLESHEETS -->
-	<link href="https://fonts.googleapis.com/css?family=Raleway:800,400" rel="stylesheet" type="text/css">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-	<link rel="stylesheet" href="assets/styles/main.css">
-</head>
-<body>
-	<h1>LCBO Tequila App</h1>
-	<div class="icon">
-		<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
 	<!ENTITY ns_flows "http://ns.adobe.com/Flows/1.0/">
 ]>
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="456px" height="456px" viewbox="-28.373 -52.106 456 456" overflow="visible" enable-background="new -28.373 -52.106 456 456" xml:space="preserve" class="icon--logo">
+<svg version="1.1"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 x="0px" y="0px" width="456px" height="456px" viewBox="-28.373 -52.106 456 456"
+	 overflow="visible" enable-background="new -28.373 -52.106 456 456" xml:space="preserve">
 <defs>
 </defs>
 <path fill-rule="evenodd" clip-rule="evenodd" fill="#5FDE84" d="M225.258,267.833c0.272-0.496,0.674-0.989,0.735-1.517
@@ -1538,17 +1517,3 @@
 	L205,309.604z M268.24,306.597c-0.15-2.233-0.692-9.36-3.062-10.548c-2.862-1.432-3.412,4.654-0.851,7.883
 	C265.193,305.03,266.501,305.917,268.24,306.597L268.24,306.597z"/>
 </svg>
-
-	</div>
-	<h2>This is not an app about Tila Tequila, the title is a joke</h2>
-	<main>
-		<p>app goes here i guess!</p>
-	</main>
-
-	<!-- SCRIPTS -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
-	<script src="assets/scripts/api_key.js"></script>
-	<script src="assets/scripts/app.js"></script>	
-</body>
-</html>
