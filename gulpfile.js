@@ -6,12 +6,13 @@ var concat = require('gulp-concat');
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 var reload = browserSync.reload;
+var injectSvg = require('gulp-inject-svg');
 
 gulp.task('default', ['browser-sync','styles', 'watch']);
 
 gulp.task('watch', function(){
 	gulp.watch('./assets/styles/**/*.scss', ['styles']);
-	gulp.watch('./*.html', reload);
+	gulp.watch('./dev/**/*.html', reload);
 });
 
 gulp.task('browser-sync', function(){
@@ -20,7 +21,6 @@ gulp.task('browser-sync', function(){
   })
 });
 
-
 gulp.task('styles', function(){
 	return gulp.src('./assets/styles/**/*.scss')
 		.pipe(sass().on('error', sass.logError))
@@ -28,4 +28,10 @@ gulp.task('styles', function(){
 		.pipe(concat('main.css'))
 		.pipe(gulp.dest('./assets/styles/'))
 		.pipe(reload({stream: true}));
+});
+
+gulp.task('injectSvg', function(){
+	return gulp.src('./dev/**/*.html')
+		.pipe(injectSvg())
+		.pipe(gulp.dest('./'));
 });
