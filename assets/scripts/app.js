@@ -30,8 +30,8 @@ app.getUserInput = function() {
 		$('#userLocation').empty();
 
 		// Convert price and volume values to ranges
-		priceRange  = app.utilities.getPriceRange(Number(priceRange));
-		volumeRange = app.utilities.getVolumeRange(Number(volumeRange));
+		priceRange  = app.utils.getPriceRange(Number(priceRange));
+		volumeRange = app.utils.getVolumeRange(Number(volumeRange));
 
 		// Get products matching user search
 		app.getProductRange(priceRange, volumeRange, userLocation);	
@@ -79,10 +79,9 @@ app.getProductRange = function(priceRange, volumeRange, userLocation) {
 		});
 
 		console.log('products', products);
-		console.log('no of products', products.length);
+		// console.log('no of products', products.length);
 
 		// Display products on page
-		products.forEach(function(product) {
 			/*	
 				PROPERTIES FOR PREVIEW SECTION:
 				id
@@ -91,9 +90,7 @@ app.getProductRange = function(priceRange, volumeRange, userLocation) {
 				package
 				price_in_cents
 				volume_in_millilitres
-			*/
 
-			/*	
 				PROPERTIES FOR SHOWCASE SECTION:
 				id
 				image_thumb
@@ -105,15 +102,55 @@ app.getProductRange = function(priceRange, volumeRange, userLocation) {
 				producer_name
 				style
 				volume_in_millilitres
-				varietal
 			*/
+
+		products.forEach(function(product) {
+			// Create an option element and append to select element
+			var option = $('<option>').val(product.id);
+			// option.text(`${event.displayName}`);
+			var roundedPrice = Math.ceil(product.price_in_cents / 100);
+			option.text(`${product.name} ${product.package} \$${roundedPrice}`);
+			$('#productSelection').append(option);
+
+			console.info('name:', product.name);
+			console.log('producer_name:', product.producer_name);			
+			console.log('origin:', product.origin);			
+			// console.log('varietal:', product.varietal);
+			console.log('style:', product.style);
 		});
 
 		// When the user selects a product from the preview section, display the 
 		// product in the showcase section
+		$('#productSelectionForm').on('submit', function(e) {
+			// Prevent default action
+			e.preventDefault();
+
+			console.log('products', products);
+
+			// Get the user selection
+			var userSelection = Number($('#productSelection').val());
+			// Empty the option value
+			$('#productSelection').empty();
+
+			console.log('userSelection', userSelection);
+
+			var selectedProduct = products.filter(function(product) {
+				return product.id === userSelection;
+			})[0];
+
+			console.log('selectedProduct', selectedProduct);
+			console.log('url', selectedProduct.image_thumb_url);
+			console.log('name', selectedProduct.name);
+			console.log('lcbo url', app.utils.getProductUrl(selectedProduct.name, selectedProduct.id));
+
+			$('#devShowcase img').attr('src', selectedProduct.image_thumb_url);
+			$('#devShowcase h2').text(selectedProduct.name);
+			$('#devShowcase a').attr('href', app.utils.getProductUrl(selectedProduct.name, selectedProduct.id));
+		});
 
 		// When the user clicks on the store availability button, display a map
 		// and a list of stores nearest to the user's location
+		// app.countProductAvailabilityPages(productId, products, userLocation);
 
 	});	
 }
@@ -129,12 +166,8 @@ app.countProductAvailabilityPages = function(productId, products, userLocation) 
 			request.setRequestHeader('Authorization', app.requestHeaderToken);
 		},
 		data: {
-			product_id : productId,
-			per_page: 5  /*! Reduce this number as much as possible 
-			                 if we just need a record count.
-			                 The minimum number appears to be 5 and the 
-			                 default is 50.
-			              */
+			product_id : productId//,
+			//per_page: 5  /*! Reduce this number as much as possible if we just need a record count */			              
 			// order: quantity.desc  /*! Maybe order by store quantities */
 		}
 	}).then(function(data) {
@@ -146,7 +179,7 @@ app.countProductAvailabilityPages = function(productId, products, userLocation) 
 
 
 // UTILITY FUNCTIONS
-app.utilities = {
+app.utils = {
 	// Get the price range limits that correspond to the input value
 	getPriceRange: function(d) {
 	    return d === 4  ? [7000, 999999] :
@@ -159,6 +192,11 @@ app.utilities = {
 	    return d === 3  ? [1140, 9999] :
 	    	   d === 2  ? [750, 1139]  :
 	                      [0, 749]     ;
+	},
+	// Convert a product name into an appropriate LCBO 
+	getProductUrl: function(name, id) {
+		var baseUrl = 'http://www.lcbo.com/lcbo/product/';
+		return baseUrl + name.toLowerCase().replace(/\s/g, '-') + '/' + id;
 	}
 }
 
