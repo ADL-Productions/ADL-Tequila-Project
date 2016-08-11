@@ -12,48 +12,118 @@
 	<meta property="og:image" content="">
 	<meta property="og:site_name" content="">
 	<meta property="og:description" content="">
-	<title>ADL - Productions!</title>
+
+	<title>Te Quiero Tequila - A Custom Range of LCBO'S Tequila Collection</title>
+
 	<link rel="icon" type="image/png" href="assets/images/agave.png">
-	<!-- STYLESHEETS -->
+
+<!-- Stylesheet -->
 	<link href='https://fonts.googleapis.com/css?family=Raleway:800,400' rel='stylesheet' type='text/css'>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 	<link rel="stylesheet" href="assets/styles/main.css">
 </head>
+
 <body>
+<!-- Hero -->
 	<header class="hero-image">
 	</header>
+<!-- Beginning Wrapper -->
+	<div class="wrapper">
+		<main>
+			<h1>LCBO Tequila App</h1>
+			<section class="user-data flexContainer">
+				<form action="" id="userInputForm">
 
-	<main>
-		<h1>LCBO Tequila App</h1>
-		<section>
-			<form action="" id="userInputForm">
-				<label for="priceRange">Select Price Range</label>
-				<input type="range" name="priceRange" id="priceRange" min="1" max="4" step="1" default="2">
-				<label for="volumeRange">Select Volume Range</label>
-				<input type="range" name="volumeRange" id="volumeRange" min="1" max="3" step="1" default="2">
-				<input type="text" name="userLocation" id="userLocation" value="kingston rd morningside ave">
-				<input type="submit" value="Submit">
-			</form>
+					<div class="user-data-one">
+						<label for="priceRange">Select Price Range</label>
+
+						<input type="range" name="priceRange" id="priceRange" min="1" max="4" step="1" default="2">
+
+						<label for="volumeRange">Select Volume Range</label>
+					</div>
+
+					<div class="user-data-two">
+						<input type="range" name="volumeRange" id="volumeRange" min="1" max="3" step="1" default="2">
+
+						<input type="text" name="userLocation" id="userLocation" value="kingston rd morningside ave">
+						<input type="submit" value="Submit">
+					</div>
+
+				</form>
+			</section>
+		</main>
+<!-- Products Showcase -->
+		<section class="product-feature flexContainer">
+			<script id="myTemplate" type="x-handlebars-template">
+				<div class="product-showcase">
+					<div class="showcaseLeft">
+						<img src="{{showcaseImage}}" alt="{{productName}}">
+					</div>
+					<div class="showcaseMiddle">
+						<h2>{{#productName}}</h2>
+						<p>{{#producerName}}</p>
+						<p>{{#productOrigin}}</p>
+						<h3>{{#productStyle}}</h3>
+
+					</div>
+					<div class="showcaseRight">
+						<div class="priceVolume">
+							<p>{{#productPrice}}</p>
+							<p>{{#productVolume}}</p>
+						</div>
+						<div class="map">
+							{{#mapContainer}}
+						</div>
+					</div>
+				</div>
+			</script>
 		</section>
-	</main>
+<!-- Products Cards -->
+		<section class="product-cards">
+			  <div class="site-content cf"><!-- Beginning Flickity Gallery -->
 
-	<section>
-		
-	</section>
+			    <h2 class="product-heading">{{#productName}}</h2>
+			    <div class="product cf" id="showcase">
+			      <div class="product-item slide">
+			        <div class="product-summary card">
+			          <div class="product-thumbnail">
+			            <img src="{{showcaseImage}}" alt="{{productName}}" height="277" width="400">
+			          </div>
 
-	<section>
-		
-	</section>
+			          <div class="product-info">
+			            <div class="product-topic webdesign"></div>
+			            <h3 class="product-title"></h3>
+			            <div class="product-meta">
+			              <time class="product-date"></time>
+			              <span class="product-duration">3</span>
+			            </div>
+			          </div>
 
-	<footer>
-		
-	</footer>
+			          <span class="product-caption ion ion-closed-captioning"></span>
 
+			        </div>
+			      </div>
 
-	<!-- SCRIPTS -->
+			    </div>
+			  </div><!-- End of Flickity Gallery -->
+		</section>
+	</div>
+<!-- Footer -->
+		<footer class"flexContainer">
+			<div class="footer-one">			
+				<h6> Designed and Coded by Daniel Pierre, Lindsie Canton, and Abena Asomaning. 	&copy; 2016 All Rights Reserved.</h6>
+			</div>
+			<div class="footer-two">
+				<h6>Data Provided by LCBO API.</h6>
+				<img src="assets/images/lcboApiLogo.png">
+			</div>
+		</footer>
+<!-- End Wrapper - Beginning Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
 	<script src="assets/scripts/api_key.js"></script>
-	<script src="assets/scripts/app.js"></script>	
+	<script src="assets/scripts/app.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.js"></script>
+
 </body>
 </html>
