@@ -165,4 +165,9 @@ app.utilities = {
 // Start the app
 $(function() {
 	app.init();
+	
+	$("#showcase").flickity({
+		wrapAround: true,
+	  //pageDots: false
+	});
 });
