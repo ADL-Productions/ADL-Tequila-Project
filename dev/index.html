@@ -13,20 +13,25 @@
 	<meta property="og:site_name" content="">
 	<meta property="og:description" content="">
 	<title>ADL - Productions!</title>
-	<!-- <link rel="icon" type="image/png" href=""> -->
+	<link rel="icon" type="image/png" href="assets/images/agave.png">
 	<!-- STYLESHEETS -->
 	<link href='https://fonts.googleapis.com/css?family=Raleway:800,400' rel='stylesheet' type='text/css'>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 	<link rel="stylesheet" href="assets/styles/main.css">
 </head>
 <body>
-	<h1>LCBO Tequila App</h1>
-	<div class="icon">
-		<img src="/assets/images/logo.svg" class="icon--logo">
-	</div>
-	<h2>This is not an app about Tila Tequila, the title is a joke</h2>
 	<main>
-		<p>app goes here i guess!</p>
+		<h1>LCBO Tequila App</h1>
+		<section>
+			<form action="" id="userInputForm">
+				<label for="priceRange">Select Price Range</label>
+				<input type="range" name="priceRange" id="priceRange" min="1" max="4" step="1" default="2">
+				<label for="volumeRange">Select Volume Range</label>
+				<input type="range" name="volumeRange" id="volumeRange" min="1" max="3" step="1" default="2">
+				<input type="text" name="userLocation" id="userLocation" value="kingston rd morningside ave">
+				<input type="submit" value="Submit">
+			</form>
+		</section>
 	</main>
 
 	<!-- SCRIPTS -->
