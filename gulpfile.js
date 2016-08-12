@@ -14,6 +14,7 @@ gulp.task('default', ['browser-sync','styles', 'watch']);
 // Watch for changes in the styles and dev folders
 gulp.task('watch', function(){
 	gulp.watch('./assets/styles/**/*.scss', ['styles']);
+	gulp.watch('./assets/scripts/**/*.js', ['html', reload]);
 	gulp.watch('./dev/**/*.html', ['html', reload]);
 });
 
