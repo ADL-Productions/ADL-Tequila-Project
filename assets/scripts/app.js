@@ -25,6 +25,11 @@ app.getUserInput = function() {
 			volumeRange  = $('#volumeRange').val(),
 			userLocation = $('#userLocation').val();
 
+			console.log("price", priceRange)
+			console.log('volume', volumeRange)
+			console.log('location', userLocation)
+
+
 		$('#priceRange').empty();
 		$('#volumeRange').empty();
 		$('#userLocation').empty();
@@ -121,7 +126,7 @@ console.log('url', selectedProduct.image_thumb_url);
 console.log('name', selectedProduct.name);
 console.log('lcbo url', app.utils.getProductUrl(selectedProduct.name, selectedProduct.id));
 
-			$('#devShowcase img').attr('src', selectedProduct.image_thumb_url);
+			$('#devShowcase .devJams').attr('src', selectedProduct.image_thumb_url);
 			$('#devShowcase h2').text(selectedProduct.name);
 			$('#devShowcase a').attr('href', app.utils.getProductUrl(selectedProduct.name, selectedProduct.id));
 
@@ -287,14 +292,19 @@ console.info('stores', stores);
 };
 
 app.plotInventoryMap = function(stores) {
+
+	if (typeof app.map !== 'undefined') {
+		app.map.remove();
+	}
+
 	// Initialize the map
-	var map = L.map('dev-map');
+	app.map = L.map('dev-map');
 
 	var CartoDB_Positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
 		subdomains: 'abcd',
 		maxZoom: 19
-	}).addTo(map);
+	}).addTo(app.map);
 
 	// Define a custom marker for stores
 	var storeIcon = L.icon({
@@ -334,6 +344,8 @@ app.plotInventoryMap = function(stores) {
 			`
 		);
 
+		console.log(marker);
+
 		// Add the marker to the marker array
 		markers.push(marker);
 	});
@@ -342,10 +354,10 @@ app.plotInventoryMap = function(stores) {
 	var markerGroup = L.featureGroup(markers);
 
 	// Fit the map to the extent of all markers
-	map.fitBounds(markerGroup);
+	app.map.fitBounds(markerGroup);
 
 	// Add markers to the map
-	markerGroup.addTo(map);
+	markerGroup.addTo(app.map);
 };
 
 
