@@ -26,27 +26,33 @@
 <body>
 <!-- Hero -->
 	<header class="hero-image">
+			<h1>LCBO Tequila App</h1>
 	</header>
 <!-- Beginning Wrapper -->
 	<div class="wrapper">
 		<main>
-			<h1>LCBO Tequila App</h1>
 			<section class="user-data flexContainer">
 				<form action="" id="userInputForm">
 
-					<div class="user-data-one">
-						<label for="priceRange">Select Price Range</label>
+					<div class="user-data-one flexContainer">
+						<div class="volumeRangeContainer">
+							<label for="volumeRange">V</label>
+							<input type="range" name="volumeRange" id="volumeRange" min="1" max="3" step="1" default="2">
+						</div>
 
-						<input type="range" name="priceRange" id="priceRange" min="1" max="4" step="1" default="2">
-
-						<label for="volumeRange">Select Volume Range</label>
+						<div class="priceRangeContainer">
+							<label for="priceRange">$</label>
+							<input type="range" name="priceRange" id="priceRange" min="1" max="4" step="1" default="2">
+						</div>
 					</div>
 
-					<div class="user-data-two">
-						<input type="range" name="volumeRange" id="volumeRange" min="1" max="3" step="1" default="2">
-
-						<input type="text" name="userLocation" id="userLocation" value="kingston rd morningside ave">
-						<input type="submit" value="Submit">
+					<div class="user-data-two flexContainer">
+						<div class="textInput">
+							<input type="text" name="userLocation" id="userLocation" value="kingston rd morningside ave">		
+						</div>
+						<div class="submitInput">
+							<input type="submit" id="dataSubmit" value="Submit">
+						</div>
 					</div>
 
 				</form>
@@ -102,7 +108,7 @@
 			      <div class="product-item slide">
 			        <div class="product-summary card">
 			          <div class="product-thumbnail">
-			            <img src="{{showcaseImage}}" alt="{{productName}}" height="277" width="400">
+			            <img src="{{showcaseImage}}" alt="" height="277" width="400">
 			          </div>
 
 			          <div class="product-info">
@@ -110,10 +116,9 @@
 			            <h3 class="product-title"></h3>
 			            <div class="product-meta">
 			              <time class="product-date"></time>
-			              <span class="product-duration">3</span>
+			              <span class="product-duration"></span>
 			            </div>
 			          </div>
->>>>>>> d55915b818726f899e2e2de7c1b83e3d39f445d0
 
 			          <span class="product-caption ion ion-closed-captioning"></span>
 
@@ -125,13 +130,12 @@
 		</section>
 	</div>
 <!-- Footer -->
-		<footer class"flexContainer">
+		<footer class="flexContainer wrapper">
 			<div class="footer-one">			
-				<h6> Designed and Coded by Daniel Pierre, Lindsie Canton, and Abena Asomaning. 	&copy; 2016 All Rights Reserved.</h6>
+				<h6>Built by <a href="http://www.danielpierre.io" target="_blank">Daniel Pierre</a>, <a href="http://www.lindsiecanton.com" target="_blank">Lindsie Canton</a>, and <a href="http://www.abenaasomaning.com" target="_blank">Abena Asomaning</a>. 	&copy; 2016 All Rights Reserved.</h6>
 			</div>
-			<div class="footer-two">
-				<h6>Data Provided by LCBO API.</h6>
-				<img src="assets/images/lcboApiLogo.png">
+			<div class="footer-two flexContainer">
+				<h6>Data Provided by <a href="https://lcboapi.com/" target="_blank"><img src="assets/images/lcboApiLogo.png"></a></h6>
 			</div>
 		</footer>
 <!-- End Wrapper - Beginning Scripts -->

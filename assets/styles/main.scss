@@ -5,12 +5,101 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 
 *, *:before, *:after { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
+$grey: #524F4F;
+$brown: #483333;
+$seafoam: #C8FFE9;
+$green: #8DDE92;
+$whitesmoke: #F5F5F5;
+$white: #FFFFFF;
+$richblack: #141414;
+
 body {
-	color: #141414;
+    color: $grey;
+    font-family: 'Raleway', sans-serif;
 }
 
-/* Flickity Gallery Cards */
-  html {
+.wrapper {
+    max-width: 1200px;
+    width: 85%;
+    margin: 0 auto;
+}
+
+.flexContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+// HEADER STYLES 
+
+header {
+	background: url("../images/hero.png") no-repeat;
+	background-color: $green;
+	background-size: cover;
+	max-height: 550px;
+	height: 80vh;
+}
+
+h1 {
+	padding: 30px;
+	margin: 0;
+}
+
+// USER DATA
+
+.user-data {
+	width: 100%;
+	background-color: $white;
+	padding: 90px;
+	margin: 90px 0;
+}
+
+#userInputForm {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.user-data-one {
+	padding-bottom: 60px;
+}
+
+.user-data-one, .user-data-two {
+	width: 100%;
+	margin: 0 auto;
+	justify-content: space-between;
+}
+
+.volumeRangeContainer, .submitInput {
+	width: 30%;
+}
+
+.priceRangeContainer, .textInput {
+	width: 60%;
+}
+
+#volumeRange, #dataSubmit {
+	width: 100%;
+	margin: 0;
+}
+
+#priceRange, #userLocation {
+	width: 100%;
+	height: 60px;
+	margin: 0;
+}
+
+#userLocation {
+	padding: 15px;
+}
+
+.submitInput input {
+	height: 60px;
+}
+
+//  Flickity Gallery Cards
+
+html {
   box-sizing: border-box;
 }
 *,
@@ -58,12 +147,9 @@ mark {
 .site-content {
 	text-align: left;
 	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 30px;
+	margin: 30px auto 90px auto;
 	padding-right: 5%; 
 	padding-left: 5%;
-	margin-bottom: 90px;
 }
 
 .card {
@@ -86,7 +172,7 @@ mark {
 	padding-left: 2%;
 	margin-bottom: 30px;
 
-	/* ensuring proper layout*/
+/* ensuring proper layout*/
 	float: left;
 }
 .product-heading {
@@ -136,7 +222,7 @@ mark {
 }
 .product-duration:before {
 	display: inline-block;
-	content: "•";
+	content: "";
 	padding-right: 5px;
 	padding-left: 5px;
 }
@@ -146,5 +232,22 @@ mark {
 	bottom: 5%;
 	font-size: 18px;
 	color: #AAB2BD;
-  
 }
+
+// FOOTER STYLES 
+
+footer {
+	padding: 30px 0 30px 0;
+}
+
+.footer-two h6 {
+	display: flex;
+	align-items: center;
+	margin: 0 auto;
+}
+
+.footer-two img {
+	width: 100px;
+	padding-left: 5px;
+}
+
