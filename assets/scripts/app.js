@@ -84,7 +84,7 @@ app.getProductRange = function(priceRange, volumeRange, userLocation) {
 			return obj.volume_in_milliliters >= volumeRange[0] && obj.volume_in_milliliters <= volumeRange[1];
 		});
 
-// console.log('products', products);
+console.log('products', products);
 // console.log('no of products', products.length);
 
 		// Display products on the page
@@ -104,18 +104,27 @@ app.getProductRange = function(priceRange, volumeRange, userLocation) {
 
 		});
 
+		// Display products on the page in a carousel
+		// Initialize the template
+		var cardTemplate = $('#productCardTemplate').html();
+		// Compile the template
+		var compiledCardTemplate = Handlebars.compile(cardTemplate);
+		// Pass data from the products object to the template
+		var filledCardTemplate = compiledCardTemplate(products);
+		// Append the template to its container
+		$('#slideContent').append(filledCardTemplate);
+
+		// $("#slideContent").flickity({
+		// 	wrapAround: true,
+		//   //pageDots: false
+		// });
+
 		// When the user selects a product from the preview section, display the 
 		// product in the showcase section
-		$('#productSelectionForm').on('submit', function(e) {
-			// Prevent default action
-			e.preventDefault();
-
-console.log('products', products);
-
+		$('#slideContent').on('click', '.product', function() {
 			// Get the user selection
-			var userSelection = Number($('#productSelection').val());
-
-console.log('userSelection', userSelection);
+			// var userSelection = Number($('#productSelection').val());
+			var userSelection = $(this).data('id');
 
 			var selectedProduct = products.filter(function(product) {
 				return product.id === userSelection;
@@ -125,6 +134,31 @@ console.log('selectedProduct', selectedProduct);
 console.log('url', selectedProduct.image_thumb_url);
 console.log('name', selectedProduct.name);
 console.log('lcbo url', app.utils.getProductUrl(selectedProduct.name, selectedProduct.id));
+		});
+
+
+
+		// When the user selects a product from the preview section, display the 
+		// product in the showcase section -- development mockup
+		$('#productSelectionForm').on('submit', function(e) {
+			// Prevent default action
+			e.preventDefault();
+
+// console.log('products', products);
+
+			// Get the user selection
+			var userSelection = Number($('#productSelection').val());
+
+// console.log('userSelection', userSelection);
+
+			var selectedProduct = products.filter(function(product) {
+				return product.id === userSelection;
+			})[0];
+
+// console.log('selectedProduct', selectedProduct);
+// console.log('url', selectedProduct.image_thumb_url);
+// console.log('name', selectedProduct.name);
+// console.log('lcbo url', app.utils.getProductUrl(selectedProduct.name, selectedProduct.id));
 
 			$('#devShowcase .devJams').attr('src', selectedProduct.image_thumb_url);
 			$('#devShowcase h2').text(selectedProduct.name);
@@ -344,7 +378,7 @@ app.plotInventoryMap = function(stores) {
 			`
 		);
 
-		console.log(marker);
+// console.log('marker', marker);
 
 		// Add the marker to the marker array
 		markers.push(marker);
