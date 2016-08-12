@@ -63,10 +63,10 @@ app.getProductRange = function(priceRange, volumeRange, userLocation) {
 
 // console.log('data - sorted by price', data);
 
-		// Filter by categories (get all tequila products for reference)		
-		var tequilaProducts = data.result.filter(function(obj) {
-			return obj.primary_category === 'Spirits' && obj.secondary_category === 'Tequila';
-		});
+		// // Filter by categories (get all tequila products for reference)		
+		// var tequilaProducts = data.result.filter(function(obj) {
+		// 	return obj.primary_category === 'Spirits' && obj.secondary_category === 'Tequila';
+		// });
 
 // console.log('all tequila products', tequilaProducts);
 
@@ -128,6 +128,7 @@ console.log('lcbo url', app.utils.getProductUrl(selectedProduct.name, selectedPr
 			// When the user clicks on the store availability button, display a map
 			// and a list of stores nearest to the user's location
 			$('#showInventory').on('click', function(e) {
+				$('#dev-map').css('height', '300px').show();
 				app.countProductAvailabilityPages(selectedProduct, products, userLocation);
 			});
 		});
@@ -154,7 +155,7 @@ app.countProductAvailabilityPages = function(selectedProduct, products, userLoca
 		}
 	}).then(function(data) {
 
-// console.info('inventory data', data);
+console.info('inventory data', data);
 
 		// Count the total number of results pages
 		var dataPages = data.pager.total_pages;
@@ -251,8 +252,6 @@ console.info('userLocation', userLocation);
 			product_id: selectedProduct.id,
 			geo: userLocation,
 			distance_in_meters: 5000
-			// per_page: 5  /*! Reduce this number as much as possible if we just need a record count */			              
-			// order: quantity.desc  /*! Maybe order by store quantities */
 		}
 	}).then(function(data) {
 
@@ -268,7 +267,9 @@ console.log('store data', data);
 		stores.forEach(function(store) {
 			for (var i = 0; i < inventories.length; i++) {
 				if (store.store_no === inventories[i].store_no) {
-					console.log('store_no', store.store_no);
+
+// console.log('store_no', store.store_no);
+
 					store.selected_product_id = inventories[i].product_id;
 					store.selected_product_quantity = inventories[i].quantity;
 					store.selected_product_updated_at = inventories[i].updated_at;
@@ -279,8 +280,72 @@ console.log('store data', data);
 
 console.info('stores', stores);
 
+		app.plotInventoryMap(stores);
+
 	});
 
+};
+
+app.plotInventoryMap = function(stores) {
+	// Initialize the map
+	var map = L.map('dev-map');
+
+	var CartoDB_Positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+		subdomains: 'abcd',
+		maxZoom: 19
+	}).addTo(map);
+
+	// Define a custom marker for stores
+	var storeIcon = L.icon({
+		// 191x494
+		iconSize: [14.4, 40],
+		iconAnchor: [7.2, 40], // [1/10 width, height]
+		popupAnchor:  [-1, -35],
+		iconUrl: 'assets/images/tequila-bottle-solid-icon.png'//,
+		// shadowUrl: 'assets/images/leaflet/marker-shadow.png'
+	});
+
+	// Initialize an array for all markers to be added to the map
+	var markers = [];
+
+	// Iterate through the restaurantsArray
+	// and create a marker for each restaurant
+	stores.forEach(function(store) {
+		// Get the restaurant's coordinates
+		var latLng = L.latLng(store.latitude, store.longitude);
+		// Calculate the distance to the venue (in kilometres)
+		// var distance = (latLng.distanceTo(eventLatLng) / 1000).toFixed(1);
+		var marker = L.marker(latLng, {
+			icon: storeIcon,
+			alt: store.address_line_1,
+			title: store.address_line_1
+		}).bindPopup(
+			`
+			<div class="popup-container">
+				<p>
+					${store.address_line_1}<br>
+					${store.city}<br>
+					Distance: ${(store.distance_in_meters / 1000).toFixed(1)} km <br>
+					Quantity: ${store.selected_product_quantity}<br>
+					Last updated: ${store.selected_product_updated_on}
+				</p>
+			</div>
+			`
+		);
+
+		// Add the marker to the marker array
+		markers.push(marker);
+	});
+
+	// Create a feature group to handle all the markers
+	var markerGroup = L.featureGroup(markers);
+
+	// Fit the map to the extent of all markers
+	map.fitBounds(markerGroup);
+
+	// Add markers to the map
+	markerGroup.addTo(map);
 };
 
 
