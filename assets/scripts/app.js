@@ -42,10 +42,6 @@ app.getUserInput = function() {
 // Get all currently available tequila products that match the user's specifications
 app.getProductRange = function(priceRange, volumeRange, userLocation) {
 
-// console.log('priceRange', priceRange);
-// console.log('volumeRange', volumeRange);
-// console.log('userLocation', userLocation);	
-
 	// Get products sorted by price
 	$.ajax({
 		url: app.lcboApiUrl + 'products',
@@ -80,10 +76,8 @@ app.getProductRange = function(priceRange, volumeRange, userLocation) {
 			return obj.volume_in_milliliters >= volumeRange[0] && obj.volume_in_milliliters <= volumeRange[1];
 		});
 
-console.log('products', products);
-// console.log('no of products', products.length);
-
-		// Display products on the page
+		// --- DEV ----------------------------------------------------
+		// Display products on the page -- select menu
 		products.forEach(function(product) {
 			// Create an option element and append to select element
 			var option       = $('<option>').val(product.id),
@@ -92,13 +86,17 @@ console.log('products', products);
 			option.text(`${product.name} ${product.package} \$${roundedPrice}`);
 			$('#productSelection').append(option);
 
-// console.info('name:', product.name);
-// console.log('producer_name:', product.producer_name);			
-// console.log('origin:', product.origin);			
-// console.log('varietal:', product.varietal);
-// console.log('style:', product.style);
-
 		});
+		// ------------------------------------------------------------
+
+		// Add rounded price and url properties to each product
+		products.forEach(function(product) {
+			product.price_in_dollars = Math.ceil(product.price_in_cents / 100);
+			product.product_url = app.utils.getProductUrl(product.name, product.id);
+		});
+
+console.log('products', products);
+console.log('no of products', products.length);
 
 		// Display products on the page in a carousel
 		// Initialize the template
@@ -110,10 +108,27 @@ console.log('products', products);
 		// Append the template to its container
 		$('#slideContent').append(filledCardTemplate);
 
+		// Initialize the carousel container as a flickity gallery
 		$("#slideContent").flickity({
 			wrapAround: true,
 		  //pageDots: false
 		});
+
+		// DISPLAY RANDOM PRODUCT IN SHOWCASE SECTION
+
+		// Get a randomly selected product to display in the feature section
+		var selectedProduct = app.utils.selectRandomItem(products);
+		// Initialize the feature template
+		var featureTemplate = $('#productFeatureTemplate').html();
+		// Compile the template
+		var compiledFeatureTemplate = Handlebars.compile(featureTemplate);
+		// Pass data from the products object to the template
+		var filledFeatureTemplate = compiledFeatureTemplate(selectedProduct);
+		// Append the template to its container
+		$('#productFeature').empty();
+		$('#productFeature').append(filledFeatureTemplate);
+
+		// DISPLAY USER-SELECTED PRODUCT IN SHOWCASE SECTION
 
 		// When the user selects a product from the preview section, display the 
 		// product in the showcase section
@@ -131,9 +146,9 @@ console.log('url', selectedProduct.image_thumb_url);
 console.log('name', selectedProduct.name);
 console.log('lcbo url', app.utils.getProductUrl(selectedProduct.name, selectedProduct.id));
 
-			// Display the selected product in the showcase section
-			// Initialize the template
-			var featureTemplate = $('#productFeatureTemplate').html();
+			// Initialize the feature template
+			// var featureTemplate = $('#productFeatureTemplate').html();
+
 			// Compile the template
 			var compiledFeatureTemplate = Handlebars.compile(featureTemplate);
 			// Pass data from the products object to the template
@@ -142,46 +157,57 @@ console.log('lcbo url', app.utils.getProductUrl(selectedProduct.name, selectedPr
 			$('#productFeature').empty();
 			$('#productFeature').append(filledFeatureTemplate);
 
-			// $('#devShowcase .devJams').attr('src', selectedProduct.image_thumb_url);
-			// $('#devShowcase h2').text(selectedProduct.name);
-			// $('#devShowcase a').attr('href', app.utils.getProductUrl(selectedProduct.name, selectedProduct.id));
+			$('#inventoryBtn').on('click', function(e) {
+				// Prevent default action
+				e.preventDefault();
 
+console.log('selectedProduct', selectedProduct);
+
+				// Set the height of the map container and make it visible
+				$('#map').css('height', '300px').show();
+				app.countProductAvailabilityPages(selectedProduct, products, userLocation);
+			});
 		});
 
 
+		// --- DEV ----------------------------------------------------
+		// // When the user selects a product from the preview section, display the 
+		// // product in the showcase section -- development mockup
+		// $('#productSelectionForm').on('submit', function(e) {
+		// 	// Prevent default action
+		// 	e.preventDefault();
 
-		// When the user selects a product from the preview section, display the 
-		// product in the showcase section -- development mockup
-		$('#productSelectionForm').on('submit', function(e) {
+		// 	// Get the user selection
+		// 	var userSelection = Number($('#productSelection').val());
+
+		// 	// Get the product info from the products array using the selected product's ID
+		// 	var selectedProduct = products.filter(function(product) {
+		// 		return product.id === userSelection;
+		// 	})[0];
+
+		// 	// Display the product image and name, and create a link to the LCBO product page
+		// 	$('#devShowcase .devJams').attr('src', selectedProduct.image_thumb_url);
+		// 	$('#devShowcase h2').text(selectedProduct.name);
+		// 	$('#devShowcase a').attr('href', app.utils.getProductUrl(selectedProduct.name, selectedProduct.id));
+
+		// 	// When the user clicks on the store availability button, display a map
+		// 	// and a list of stores nearest to the user's location
+		// 	$('#showInventory').on('click', function(e) {
+		// 		$('#dev-map').css('height', '300px').show();
+		// 		app.countProductAvailabilityPages(selectedProduct, products, userLocation);
+		// 	});
+		// });
+		// ------------------------------------------------------------
+
+		$('#inventoryBtn').on('click', function(e) {
 			// Prevent default action
 			e.preventDefault();
 
-// console.log('products', products);
+console.log('selectedProduct', selectedProduct);
 
-			// Get the user selection
-			var userSelection = Number($('#productSelection').val());
-
-// console.log('userSelection', userSelection);
-
-			var selectedProduct = products.filter(function(product) {
-				return product.id === userSelection;
-			})[0];
-
-// console.log('selectedProduct', selectedProduct);
-// console.log('url', selectedProduct.image_thumb_url);
-// console.log('name', selectedProduct.name);
-// console.log('lcbo url', app.utils.getProductUrl(selectedProduct.name, selectedProduct.id));
-
-			$('#devShowcase .devJams').attr('src', selectedProduct.image_thumb_url);
-			$('#devShowcase h2').text(selectedProduct.name);
-			$('#devShowcase a').attr('href', app.utils.getProductUrl(selectedProduct.name, selectedProduct.id));
-
-			// When the user clicks on the store availability button, display a map
-			// and a list of stores nearest to the user's location
-			$('#showInventory').on('click', function(e) {
-				$('#dev-map').css('height', '300px').show();
-				app.countProductAvailabilityPages(selectedProduct, products, userLocation);
-			});
+			// Set the height of the map container and make it visible
+			$('#map').css('height', '300px').show();
+			app.countProductAvailabilityPages(selectedProduct, products, userLocation);
 		});
 	});	
 }
@@ -287,10 +313,10 @@ app.getProductAvailability = function(dataPages, selectedProduct, products, user
 // Get a count of the number of response pages at the stores endpoint
 app.countStoreLocations = function(inventories, selectedProduct, product, userLocation) {
 
-console.info('inventories', inventories);
-console.info('selectedProduct', selectedProduct);
-console.info('product', product);
-console.info('userLocation', userLocation);
+// console.info('inventories', inventories);
+// console.info('selectedProduct', selectedProduct);
+// console.info('product', product);
+// console.info('userLocation', userLocation);
 
 	$.ajax({
 		url: app.lcboApiUrl + 'stores',
@@ -306,7 +332,7 @@ console.info('userLocation', userLocation);
 		}
 	}).then(function(data) {
 
-console.log('store data', data);
+// console.log('store data', data);
 
 		var stores = data.result;
 		
@@ -329,7 +355,7 @@ console.log('store data', data);
 			} 
 		});
 
-console.info('stores', stores);
+// console.info('stores', stores);
 
 		app.plotInventoryMap(stores);
 
@@ -426,6 +452,11 @@ app.utils = {
 	getProductUrl: function(name, id) {
 		var baseUrl = 'http://www.lcbo.com/lcbo/product/';
 		return baseUrl + name.toLowerCase().replace(/\s/g, '-') + '/' + id;
+	},
+	// Select a random item from an array
+	selectRandomItem: function(array) {
+		var index = Math.floor(Math.random() * array.length);
+		return array[index];
 	}
 }
 

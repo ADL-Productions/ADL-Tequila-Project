@@ -31,10 +31,11 @@
 
 					<div class="product-thumbnail">
 					{{#if image_thumb_url}}
-						<img src="{{image_thumb_url}}" alt="">
+						<img src="{{image_thumb_url}}" alt="{{name}}">
 					{{else}}
-						<img src="assets/images/bottle-sample.png" alt="">
+						<img src="assets/images/bottle-placeholder.png" alt="{{name}}">
 					{{/if}}
+						<div class="product-thumbnail-price">${{price_in_dollars}}</div>
 					</div>
 
 					<div class="product-info">
@@ -42,8 +43,7 @@
 							<h3 class="product-name">{{name}}</h3>
 						</div>
 						<p class="product-style"><span>&ldquo;</span>{{style}}<span>&rdquo;</span></p>
-						<p class="product-size">{{package}}</p>
-						
+						<p class="product-size">{{package}}</p>						
 					</div>
 
 				</div>
@@ -54,25 +54,31 @@
 	<script id="productFeatureTemplate" type="x-handlebars-template">
 		<div class="product-showcase">
 			<div class="showcaseLeft">
+			{{#if image_url}}
 				<img src="{{image_url}}" alt="{{name}}">
+			{{else}}
+				<img src="assets/images/bottle-placeholder.png" alt="{{name}}">
+			{{/if}}
 			</div>
 			<div class="showcaseMiddle">
 				<h2>{{name}}</h2>
 				<p>{{producer_name}}</p>
 				<p>{{origin}}</p>
 				<h3>{{style}}</h3>
-
 			</div>
 			<div class="showcaseRight">
 				<div class="priceVolume">
-					<p>${{price_in_cents}}</p>
+					<p>${{price_in_dollars}}</p>
 					<p>{{package}}</p>
 				</div>
-				<div class="map"></div>
+				<div class="feature-btn-group">
+					<button type="button "id="inventoryBtn" class="feature-btn inventory-btn">Check Stores</button>
+					<a id="buyOnlineBtn" class="feature-btn buy-online-btn" href="{{product_url}}" target="_blank">Buy Online</a>
+				</div>
+				<div id="map" class="map"></div>
 			</div>
 		</div>		
 	</script>
-
 </head>
 
 <body>

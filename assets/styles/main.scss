@@ -278,11 +278,21 @@ mark {
 .product-thumbnail {
 	height: 250px;
 	text-align: center;
+	position: relative;
 }
 
 .product-thumbnail img {
 	height: 250px;
 	margin: 0 auto;
+}
+
+.product-thumbnail-price {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #555;
 }
 
 .product-size {
@@ -424,6 +434,30 @@ mark {
 }
 .showcaseRight {
 	width: 20%;
+}
+
+.feature-btn {
+	padding: 8px 16px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	white-space: nowrap;
+	color: #8DDE92;
+	background-color: transparent;
+	border: 4px solid #8DDE92;
+	width: 185px;
+}
+
+.feature-btn:focus {
+	outline: none;
+	outline: 3px solid darken($green,30%);
+}
+
+.inventory-btn {
+	margin-bottom: 20px;
+}
+
+.buy-online-btn {
+	display: inline-block;
 }
 
 // FOOTER STYLES 
