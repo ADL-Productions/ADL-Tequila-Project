@@ -25,11 +25,7 @@ app.getUserInput = function() {
 			volumeRange  = $('#volumeRange').val(),
 			userLocation = $('#userLocation').val();
 
-			console.log("price", priceRange)
-			console.log('volume', volumeRange)
-			console.log('location', userLocation)
-
-
+		// Clear the inputs
 		$('#priceRange').empty();
 		$('#volumeRange').empty();
 		$('#userLocation').empty();
@@ -137,14 +133,18 @@ console.log('lcbo url', app.utils.getProductUrl(selectedProduct.name, selectedPr
 
 			// Display the selected product in the showcase section
 			// Initialize the template
-			var featureTemplate = $('#productCardTemplate').html();
+			var featureTemplate = $('#productFeatureTemplate').html();
 			// Compile the template
 			var compiledFeatureTemplate = Handlebars.compile(featureTemplate);
 			// Pass data from the products object to the template
 			var filledFeatureTemplate = compiledFeatureTemplate(selectedProduct);
 			// Append the template to its container
+			$('#productFeature').empty();
 			$('#productFeature').append(filledFeatureTemplate);
 
+			// $('#devShowcase .devJams').attr('src', selectedProduct.image_thumb_url);
+			// $('#devShowcase h2').text(selectedProduct.name);
+			// $('#devShowcase a').attr('href', app.utils.getProductUrl(selectedProduct.name, selectedProduct.id));
 
 		});
 
@@ -206,7 +206,7 @@ app.countProductAvailabilityPages = function(selectedProduct, products, userLoca
 		}
 	}).then(function(data) {
 
-console.info('inventory data', data);
+// console.info('inventory data', data);
 
 		// Count the total number of results pages
 		var dataPages = data.pager.total_pages;
@@ -264,7 +264,7 @@ app.getProductAvailability = function(dataPages, selectedProduct, products, user
 			// This array will contain the data for each of the ajax responses
 			var returnedPages = Array.prototype.slice.call(arguments);
 
-console.info('returnedPages', returnedPages);
+// console.info('returnedPages', returnedPages);
 
 			// Initialize an array to contain store inventories
 			var inventories = [];

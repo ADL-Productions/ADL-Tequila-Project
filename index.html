@@ -21,7 +21,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Raleway:800,400' rel='stylesheet' type='text/css'>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://npmcdn.com/flickity@2.0/dist/flickity.min.css">
-	<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+	<link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
 	<link rel="stylesheet" href="assets/styles/main.css">
 	<script id="productCardTemplate" type="x-handlebars-template">
 		{{#each this}}
@@ -62,15 +62,38 @@
 			</div>
 			<div class="showcaseRight">
 				<div class="priceVolume">
-					<p>{{price_in_cents}}</p>
+					<p>${{price_in_cents}}</p>
 					<p>{{package}}</p>
 				</div>
-				<div class="map">
-					{{}}
-				</div>
+				<div class="map"></div>
 			</div>
 		</div>		
 	</script>
+
+	<style>
+		.product-feature {
+			display: inline-block;
+			margin: 50px auto 0;
+			background-color: #f5f5f5;
+		}
+		.product-showcase {			
+			display: flex;
+			justify-content: center;
+		}
+		.showcaseLeft {
+			width: 40%;
+		}
+		.showcaseLeft img {
+			display: block;
+			margin: 0 auto;
+		}
+		.showcaseMiddle {
+			width: 20%;
+		}
+		.showcaseRight {
+			width: 20%;
+		}
+	</style>
 </head>
 
 <body>
@@ -78,75 +101,72 @@
 	<header class="hero-image">
 	</header>
 <!-- Beginning Wrapper -->
-	<div class="wrapper">
-		<main>
-			<h1>LCBO Tequila App</h1>
-			<section class="user-data flexContainer">
-				<form action="" id="userInputForm">
+	<main class="wrapper">
+		<h1>LCBO Tequila App</h1>
+		<section class="user-data flexContainer">
+			<form action="" id="userInputForm">
 
-					<div class="user-data-one flexContainer">
-						<div class="volumeRangeContainer">
-							<label for="volumeRange">V</label>
-							<input type="range" name="volumeRange" id="volumeRange" min="1" max="3" step="1" default="2">
-						</div>
-
-						<div class="priceRangeContainer">
-							<label for="priceRange">$</label>
-							<input type="range" name="priceRange" id="priceRange" min="1" max="4" step="1" default="2">
-						</div>
+				<div class="user-data-one flexContainer">
+					<div class="volumeRangeContainer">
+						<label for="volumeRange">V</label>
+						<input type="range" name="volumeRange" id="volumeRange" min="1" max="3" step="1" default="2">
 					</div>
 
-					<div class="user-data-two flexContainer">
-						<div class="textInput">
-							<input type="text" name="userLocation" id="userLocation" value="kingston rd morningside ave">		
-						</div>
-						<div class="submitInput">
-							<input type="submit" id="dataSubmit" value="Submit">
-						</div>
+					<div class="priceRangeContainer">
+						<label for="priceRange">$</label>
+						<input type="range" name="priceRange" id="priceRange" min="1" max="4" step="1" default="2">
 					</div>
-
-				</form>
-			</section>
-
-			<section>
-				<form action="" id="productSelectionForm">
-					<select name="productSelection" id="productSelection"></select>
-					<input type="submit" value="Submit">
-				</form>
-			</section>
-
-			<section id="devShowcase">
-				<div>
-					<h2></h2>
-					<img class="devJams" src="" alt="">
-					<a href="" target="_blank">BUY ONLINE!</a>
-					<button id="showInventory">SHOW INVENTORY</button>
 				</div>
-				<div id="dev-map"></div>
-			</section>
-		</main>
 
-<!-- Products Cards -->
-		<section class="product-cards">
-		  	<div class="slide-content cf" id="slideContent">	
-			</div><!-- Flickity Gallery / Handlebars Template -->
+				<div class="user-data-two flexContainer">
+					<div class="textInput">
+						<input type="text" name="userLocation" id="userLocation" value="483 queen st w toronto">		
+					</div>
+					<div class="submitInput">
+						<input type="submit" id="dataSubmit" value="Submit">
+					</div>
+				</div>
+
+			</form>
+		</section>
+
+		<section>
+			<form action="" id="productSelectionForm">
+				<select name="productSelection" id="productSelection"></select>
+				<input type="submit" value="Submit">
+			</form>
+		</section>
+
+		<section id="devShowcase">
+			<div>
+				<h2></h2>
+				<img class="devJams" src="" alt="">
+				<a href="" target="_blank">BUY ONLINE!</a>
+				<button id="showInventory">SHOW INVENTORY</button>
+			</div>
+			<div id="dev-map"></div>
 		</section>
 
 <!-- Products Showcase -->
 		<section class="product-feature flexContainer" id="productFeature">
-			
+		</section><!-- Product Feature / Handlebars Template -->
+
+<!-- Products Cards -->
+		<section class="product-cards">
+		  	<div class="slide-content cf" id="slideContent">
+			</div><!-- Flickity Gallery / Handlebars Template -->
 		</section>
-	</div>
+	</main>
 
 <!-- Footer -->
-		<footer class="flexContainer wrapper">
-			<div class="footer-one">			
-				<h6>Built by <a href="http://www.danielpierre.io" target="_blank">Daniel Pierre</a>, <a href="http://www.lindsiecanton.com" target="_blank">Lindsie Canton</a>, and <a href="http://www.abenaasomaning.com" target="_blank">Abena Asomaning</a>. 	&copy; 2016 All Rights Reserved.</h6>
-			</div>
-			<div class="footer-two flexContainer">
-				<h6>Data Provided by <a href="https://lcboapi.com/" target="_blank"><img src="assets/images/lcboApiLogo.png"></a></h6>
-			</div>
-		</footer>
+	<footer class="flexContainer wrapper">
+		<div class="footer-one">
+			<h6>Built by <a href="http://www.danielpierre.io" target="_blank">Daniel Pierre</a>, <a href="http://www.lindsiecanton.com" target="_blank">Lindsie Canton</a>, and <a href="http://www.abenaasomaning.com" target="_blank">Abena Asomaning</a>. 	&copy; 2016 All Rights Reserved.</h6>
+		</div>
+		<div class="footer-two flexContainer">
+			<h6>Data Provided by <a href="https://lcboapi.com/" target="_blank"><img src="assets/images/lcboApiLogo.png"></a></h6>
+		</div>
+	</footer>
 <!-- End Wrapper - Beginning Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>	
