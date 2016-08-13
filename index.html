@@ -22,6 +22,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://npmcdn.com/flickity@2.0/dist/flickity.min.css">
 	<link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
+	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 	<link rel="stylesheet" href="assets/styles/main.css">
 	<script id="productCardTemplate" type="x-handlebars-template">
 		{{#each this}}
@@ -83,12 +84,11 @@
 
 <body>
 <!-- Hero -->
-	<header>
+	<header id="top">
 		<div class="headerText wrapper flexContainer">
 			<h1>Te Quiero</h1>
 			<h1 class="headKey">Tequila</h1>
 			<h2>Get Lit Your Way!</h2>
-			<img src="assets/images/adl-logo.svg" class="logo">
 		</div>
 	</header>
 <!-- Beginning Wrapper -->
@@ -123,14 +123,14 @@
 			</form>
 		</section>
 
-		<section>
+		<!-- <section>
 			<form action="" id="productSelectionForm">
 				<select name="productSelection" id="productSelection"></select>
 				<input type="submit" value="Submit">
 			</form>
-		</section>
+		</section> -->
 
-		<section id="devShowcase">
+		<!-- <section id="devShowcase">
 			<div>
 				<h2></h2>
 				<img class="devJams" src="" alt="">
@@ -138,7 +138,7 @@
 				<button id="showInventory">SHOW INVENTORY</button>
 			</div>
 			<div id="dev-map"></div>
-		</section>
+		</section> -->
 
 <!-- Products Showcase -->
 		<section class="product-feature flexContainer" id="productFeature">
@@ -149,6 +149,9 @@
 		  	<div class="slide-content cf" id="slideContent">
 			</div><!-- Flickity Gallery / Handlebars Template -->
 		</section>
+
+		<button class="reset">Reset</button>
+
 	</main>
 
 <!-- Footer -->
@@ -168,6 +171,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
 	<script src="https://npmcdn.com/flickity@2.0/dist/flickity.pkgd.min.js"></script>
 	<script src="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.js"></script>
+	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
 	<script src="assets/scripts/api_key.js"></script>
 	<script src="assets/scripts/app.js"></script>
 
