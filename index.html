@@ -17,11 +17,11 @@
 
 	<link rel="icon" type="image/png" href="assets/images/agave.png">
 
-<!-- Stylesheet -->
-	<link href='https://fonts.googleapis.com/css?family=Raleway:800,400' rel='stylesheet' type='text/css'>
+<!-- Stylesheets and Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Raleway:400,500i,800' rel='stylesheet' type='text/css'>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://npmcdn.com/flickity@2.0/dist/flickity.min.css">
-	<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+	<link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
 	<link rel="stylesheet" href="assets/styles/main.css">
 	<script id="productCardTemplate" type="x-handlebars-template">
 		{{#each this}}
@@ -31,16 +31,17 @@
 
 					<div class="product-thumbnail">
 					{{#if image_thumb_url}}
-						<img src="{{image_thumb_url}}" alt="" height="248" width="400">
+						<img src="{{image_thumb_url}}" alt="">
 					{{else}}
-						<img src="assets/images/bottle-sample.png" alt="" height="90" style="display:block;margin:30px auto 0;">
+						<img src="assets/images/bottle-sample.png" alt="">
 					{{/if}}
 					</div>
 
 					<div class="product-info">
 						<h3 class="product-name">{{name}}</h3>
+						<p class="product-style"><span>&ldquo;</span>{{style}}<span>&rdquo;</span></p>
 						<p class="product-size">{{package}}</p>
-						<p class="product-style">{{style}}</p>
+						
 					</div>
 
 				</div>
@@ -78,8 +79,8 @@
 	<header class="hero-image">
 	</header>
 <!-- Beginning Wrapper -->
-	<div class="wrapper">
-		<main>
+	
+		<main class="wrapper">
 			<h1>LCBO Tequila App</h1>
 			<section class="user-data flexContainer">
 				<form action="" id="userInputForm">
@@ -124,7 +125,7 @@
 				</div>
 				<div id="dev-map"></div>
 			</section>
-		</main>
+		
 
 <!-- Products Cards -->
 		<section class="product-cards">
@@ -136,7 +137,7 @@
 		<section class="product-feature flexContainer" id="productFeature">
 			
 		</section>
-	</div>
+	</main>
 
 <!-- Footer -->
 		<footer class="flexContainer wrapper">
