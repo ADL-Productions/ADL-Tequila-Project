@@ -20,16 +20,18 @@
 <!-- Stylesheet -->
 	<link href='https://fonts.googleapis.com/css?family=Raleway:800,400' rel='stylesheet' type='text/css'>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://npmcdn.com/flickity@2.0/dist/flickity.min.css">
+	<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
 	<link rel="stylesheet" href="assets/styles/main.css">
 	<script id="productCardTemplate" type="x-handlebars-template">
 		{{#each this}}
-		<div class="product cf" data-id="{{id}}">
-			<div class="product-item slide">
+		<div class="product cf">
+			<div class="product-item slide" data-id="{{id}}">
 				<div class="product-summary card">
 
 					<div class="product-thumbnail">
 					{{#if image_thumb_url}}
-						<img src="{{image_thumb_url}}" alt="" height="248">
+						<img src="{{image_thumb_url}}" alt="" height="248" width="400">
 					{{else}}
 						<img src="assets/images/bottle-sample.png" alt="" height="90" style="display:block;margin:30px auto 0;">
 					{{/if}}
@@ -45,6 +47,29 @@
 			</div>
 		</div>
 		{{/each}}
+	</script>
+	<script id="productFeatureTemplate" type="x-handlebars-template">
+		<div class="product-showcase">
+			<div class="showcaseLeft">
+				<img src="{{image_url}}" alt="{{name}}">
+			</div>
+			<div class="showcaseMiddle">
+				<h2>{{name}}</h2>
+				<p>{{producer_name}}</p>
+				<p>{{origin}}</p>
+				<h3>{{style}}</h3>
+
+			</div>
+			<div class="showcaseRight">
+				<div class="priceVolume">
+					<p>{{price_in_cents}}</p>
+					<p>{{package}}</p>
+				</div>
+				<div class="map">
+					{{}}
+				</div>
+			</div>
+		</div>		
 	</script>
 </head>
 
@@ -95,39 +120,21 @@
 					<h2></h2>
 					<img class="devJams" src="" alt="">
 					<a href="" target="_blank">BUY ONLINE!</a>
+					<button id="showInventory">SHOW INVENTORY</button>
 				</div>
+				<div id="dev-map"></div>
 			</section>
 		</main>
-<!-- Products Showcase -->
-		<section class="product-feature flexContainer">
-			<script id="myTemplate" type="x-handlebars-template">
-				<div class="product-showcase">
-					<div class="showcaseLeft">
-						<img src="{{showcaseImage}}" alt="{{productName}}">
-					</div>
-					<div class="showcaseMiddle">
-						<h2>{{#productName}}</h2>
-						<p>{{#producerName}}</p>
-						<p>{{#productOrigin}}</p>
-						<h3>{{#productStyle}}</h3>
 
-					</div>
-					<div class="showcaseRight">
-						<div class="priceVolume">
-							<p>{{#productPrice}}</p>
-							<p>{{#productVolume}}</p>
-						</div>
-						<div class="map">
-							{{#mapContainer}}
-						</div>
-					</div>
-				</div>
-			</script>
-		</section>
 <!-- Products Cards -->
 		<section class="product-cards">
 		  	<div class="slide-content cf" id="slideContent">	
 			</div><!-- Flickity Gallery / Handlebars Template -->
+		</section>
+
+<!-- Products Showcase -->
+		<section class="product-feature flexContainer" id="productFeature">
+			
 		</section>
 	</div>
 

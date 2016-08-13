@@ -114,18 +114,18 @@ console.log('products', products);
 		// Append the template to its container
 		$('#slideContent').append(filledCardTemplate);
 
-		// $("#slideContent").flickity({
-		// 	wrapAround: true,
-		//   //pageDots: false
-		// });
+		$("#slideContent").flickity({
+			wrapAround: true,
+		  //pageDots: false
+		});
 
 		// When the user selects a product from the preview section, display the 
 		// product in the showcase section
-		$('#slideContent').on('click', '.product', function() {
+		$('#slideContent').on('click', '.product-item', function() {
 			// Get the user selection
-			// var userSelection = Number($('#productSelection').val());
 			var userSelection = $(this).data('id');
 
+			// Get the product info from the products array using the selected product's ID
 			var selectedProduct = products.filter(function(product) {
 				return product.id === userSelection;
 			})[0];
@@ -134,6 +134,18 @@ console.log('selectedProduct', selectedProduct);
 console.log('url', selectedProduct.image_thumb_url);
 console.log('name', selectedProduct.name);
 console.log('lcbo url', app.utils.getProductUrl(selectedProduct.name, selectedProduct.id));
+
+			// Display the selected product in the showcase section
+			// Initialize the template
+			var featureTemplate = $('#productCardTemplate').html();
+			// Compile the template
+			var compiledFeatureTemplate = Handlebars.compile(featureTemplate);
+			// Pass data from the products object to the template
+			var filledFeatureTemplate = compiledFeatureTemplate(selectedProduct);
+			// Append the template to its container
+			$('#productFeature').append(filledFeatureTemplate);
+
+
 		});
 
 
@@ -420,9 +432,4 @@ app.utils = {
 // Start the app
 $(function() {
 	app.init();
-	
-	// $("#showcase").flickity({
-	// 	wrapAround: true,
-	//   //pageDots: false
-	// });
 });
