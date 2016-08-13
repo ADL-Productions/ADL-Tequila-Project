@@ -7,11 +7,6 @@ app.lcboApiKey = lcboApiKey;
 app.lcboApiUrl = 'http://lcboapi.com/';
 app.requestHeaderToken = 'Token token=' + app.lcboApiKey;
 
-app.init = function() {
-	// console.log('api key >>>', app.lcboApiKey);
-	app.getUserInput();
-};
-
 // Get user input from form submission in order to filter tequila products
 app.getUserInput = function() {
 
@@ -110,8 +105,7 @@ console.log('no of products', products.length);
 
 		// Initialize the carousel container as a flickity gallery
 		$("#slideContent").flickity({
-			wrapAround: true,
-		  //pageDots: false
+			wrapAround: true
 		});
 
 		// DISPLAY RANDOM PRODUCT IN SHOWCASE SECTION
@@ -125,7 +119,6 @@ console.log('no of products', products.length);
 		// Pass data from the products object to the template
 		var filledFeatureTemplate = compiledFeatureTemplate(selectedProduct);
 		// Append the template to its container
-		$('#productFeature').empty();
 		$('#productFeature').append(filledFeatureTemplate);
 
 		// DISPLAY USER-SELECTED PRODUCT IN SHOWCASE SECTION
@@ -370,7 +363,8 @@ app.plotInventoryMap = function(stores) {
 	}
 
 	// Initialize the map
-	app.map = L.map('dev-map');
+	// app.map = L.map('dev-map');
+	app.map = L.map('map');
 
 	var CartoDB_Positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
@@ -410,7 +404,7 @@ app.plotInventoryMap = function(stores) {
 					${store.city}<br>
 					Distance: ${(store.distance_in_meters / 1000).toFixed(1)} km <br>
 					Quantity: ${store.selected_product_quantity}<br>
-					Last updated: ${store.selected_product_updated_on}
+					As of: ${store.selected_product_updated_on}
 				</p>
 			</div>
 			`
@@ -430,8 +424,23 @@ app.plotInventoryMap = function(stores) {
 
 	// Add markers to the map
 	markerGroup.addTo(app.map);
+
+	// Add fullscreen control
+	L.control.fullscreen().addTo(app.map);
 };
 
+// Scroll to top and reload the page
+app.reset = function() {
+	$('.reset').on('click', function() {
+		// window.scrollTo(0,0);
+		$('html, body')
+			.animate({ scrollTop: 0 }, 1000)
+			.queue(function () {
+				location.reload();
+				// $(this).dequeue();
+			});
+	});
+}
 
 // UTILITY FUNCTIONS
 app.utils = {
@@ -459,6 +468,12 @@ app.utils = {
 		return array[index];
 	}
 }
+
+app.init = function() {
+	// console.log('api key >>>', app.lcboApiKey);
+	app.getUserInput();
+	app.reset();
+};
 
 // Start the app
 $(function() {
