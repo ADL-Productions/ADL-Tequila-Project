@@ -55,6 +55,7 @@ h2 {
 
 h3 {
 	font-size: 19px;
+	padding-top:0px;
 }
 
 h6 {
@@ -65,6 +66,10 @@ h6 {
 a {
 	color: $green;
 	text-decoration: none;
+}
+
+p {
+	text-align: left;
 }
 
 // USER DATA
@@ -223,6 +228,25 @@ mark {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.product-summary.card {
+	width:350px;
+	margin: 30px;
+}
+
+.product-thumbnail {
+	height: 250px;
+	text-align: center;
+}
+
+.product-thumbnail img {
+	height: 250px;
+	margin: 0 auto;
+}
+
+.product-size {
+	padding: 0;
+}
+
 .site-content {
 	text-align: left;
 	width: 100%;
@@ -241,10 +265,10 @@ mark {
 	border: 1px solid #E6E9ED;
 }
 
-.courses {
-	margin-top: 30px;
-	margin-bottom: 60px;
-}
+// .courses {
+// 	margin-top: 30px;
+// 	margin-bottom: 10px;
+// }
 .product-item {
 	width: 33%;
 	padding-right: 2%;
@@ -256,7 +280,7 @@ mark {
 }
 .product-heading {
 	// font-weight: 500;
-	font-size: 12px;
+	font-size: 25px;
 	color: #AAB2BD;
 	text-transform: uppercase;
 	text-align: center;
@@ -286,10 +310,22 @@ mark {
 // .product-topic.design {
 // 	color: #F44336;
 // }
+
 .product-name {
-	// font-weight: 500;
-	font-size: 14px;
-	margin: 0 0 30%;
+	font-size: 20px;
+	margin: 0 0 10%;
+	color:$green;
+}
+
+.product-style {
+	font-size: 15px;
+	font-style: italic;
+	padding:0;
+
+}
+
+.product-style span {
+	font-size: 15px;
 }
 // .product-meta {
 // 	color: #AAB2BD;
