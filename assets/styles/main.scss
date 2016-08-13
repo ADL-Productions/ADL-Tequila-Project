@@ -349,6 +349,31 @@ mark {
 // 	color: #AAB2BD;
 // }
 
+// FEATURE CARD STYLES
+
+.product-feature {
+	display: inline-block;
+	margin: 50px auto 0;
+	background-color: #f5f5f5;
+}
+.product-showcase {
+	display: flex;
+	justify-content: center;
+}
+.showcaseLeft {
+	width: 40%;
+}
+.showcaseLeft img {
+	display: block;
+	margin: 0 auto;
+}
+.showcaseMiddle {
+	width: 20%;
+}
+.showcaseRight {
+	width: 20%;
+}
+
 // FOOTER STYLES 
 
 footer {
@@ -391,4 +416,44 @@ footer {
 #dev-map {
 	height: 300px;
 	display: none;
+}
+
+// PRODUCT CARD ADDITIONAL STYLES
+
+.product-thumbnail {
+	position: relative;
+}
+.product-thumbnail-price {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #555;
+}
+
+// PRODUCT FEATURE ADDITIONAL STYLES
+
+.feature-btn {
+	padding: 8px 16px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	white-space: nowrap;
+	color: #8DDE92;
+	background-color: transparent;
+	border: 4px solid #8DDE92;
+	width: 185px;
+}
+
+.feature-btn:focus {
+	outline: none;
+	outline: 3px solid darken($green,30%);
+}
+
+.inventory-btn {
+	margin-bottom: 20px;
+}
+
+.buy-online-btn {
+	display: inline-block;
 }
