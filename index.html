@@ -17,8 +17,8 @@
 
 	<link rel="icon" type="image/png" href="assets/images/agave.png">
 
-<!-- Stylesheet -->
-	<link href='https://fonts.googleapis.com/css?family=Raleway:800,400' rel='stylesheet' type='text/css'>
+<!-- Stylesheets and Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Raleway:400,500i,600' rel='stylesheet' type='text/css'>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://npmcdn.com/flickity@2.0/dist/flickity.min.css">
 	<link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
@@ -31,16 +31,19 @@
 
 					<div class="product-thumbnail">
 					{{#if image_thumb_url}}
-						<img src="{{image_thumb_url}}" alt="" height="248" width="400">
+						<img src="{{image_thumb_url}}" alt="">
 					{{else}}
-						<img src="assets/images/bottle-sample.png" alt="" height="90" style="display:block;margin:30px auto 0;">
+						<img src="assets/images/bottle-sample.png" alt="">
 					{{/if}}
 					</div>
 
 					<div class="product-info">
-						<h3 class="product-name">{{name}}</h3>
+						<div class="card-title-box">
+							<h3 class="product-name">{{name}}</h3>
+						</div>
+						<p class="product-style"><span>&ldquo;</span>{{style}}<span>&rdquo;</span></p>
 						<p class="product-size">{{package}}</p>
-						<p class="product-style">{{style}}</p>
+						
 					</div>
 
 				</div>
@@ -62,91 +65,96 @@
 			</div>
 			<div class="showcaseRight">
 				<div class="priceVolume">
-					<p>{{price_in_cents}}</p>
+					<p>${{price_in_cents}}</p>
 					<p>{{package}}</p>
 				</div>
-				<div class="map">
-					{{}}
-				</div>
+				<div class="map"></div>
 			</div>
 		</div>		
 	</script>
+
 </head>
 
 <body>
 <!-- Hero -->
-	<header class="hero-image">
+	<header>
+		<div class="headerText wrapper flexContainer">
+			<h1>Te Quiero</h1>
+			<h1 class="headKey">Tequila</h1>
+			<h2>Get Lit Your Way!</h2>
+		</div>
 	</header>
 <!-- Beginning Wrapper -->
-	<div class="wrapper">
-		<main>
-			<h1>LCBO Tequila App</h1>
-			<section class="user-data flexContainer">
-				<form action="" id="userInputForm">
+	<main class="wrapper">
+		<section class="user-data flexContainer">
+			<h2>A quick search will reveal the Tequila of your dreams</h2>
+			<form action="" id="userInputForm">
 
-					<div class="user-data-one flexContainer">
-						<div class="volumeRangeContainer">
-							<label for="volumeRange">V</label>
-							<input type="range" name="volumeRange" id="volumeRange" min="1" max="3" step="1" default="2">
-						</div>
-
-						<div class="priceRangeContainer">
-							<label for="priceRange">$</label>
-							<input type="range" name="priceRange" id="priceRange" min="1" max="4" step="1" default="2">
-						</div>
+				<div class="user-data-one flexContainer">
+					<div class="volumeRangeContainer">
+						<label for="volumeRange"></label>
+						<input type="range" name="volumeRange" id="volumeRange" min="1" max="3" step="1" default="2">
 					</div>
 
-					<div class="user-data-two flexContainer">
-						<div class="textInput">
-							<input type="text" name="userLocation" id="userLocation" value="kingston rd morningside ave">		
-						</div>
-						<div class="submitInput">
-							<input type="submit" id="dataSubmit" value="Submit">
-						</div>
+					<div class="priceRangeContainer">
+						<label for="priceRange"></label>
+						<input type="range" name="priceRange" id="priceRange" min="1" max="4" step="1" default="2">
 					</div>
+				</div>
 
-				</form>
-			</section>
-
-			<section>
-				<form action="" id="productSelectionForm">
-					<select name="productSelection" id="productSelection"></select>
-					<input type="submit" value="Submit">
-				</form>
-			</section>
-
-			<section id="devShowcase">
-				<div>
-					<h2></h2>
-					<img class="devJams" src="" alt="">
-					<a href="" target="_blank">BUY ONLINE!</a>
-					<button id="showInventory">SHOW INVENTORY</button>
+				<div class="user-data-two flexContainer">
+					<div class="textInput">
+						<input type="text" name="userLocation" id="userLocation" value="483 queen st w toronto">		
+					</div>
+					<div class="submitInput">
+						<input type="submit" id="dataSubmit" value="Submit">
+					</div>
 				</div>
 				<div id="dev-map"></div>
 			</section>
-		</main>
 
-<!-- Products Cards -->
-		<section class="product-cards">
-		  	<div class="slide-content cf" id="slideContent">	
-			</div><!-- Flickity Gallery / Handlebars Template -->
+			</form>
+		</section>
+
+		<section>
+			<form action="" id="productSelectionForm">
+				<select name="productSelection" id="productSelection"></select>
+				<input type="submit" value="Submit">
+			</form>
+		</section>
+
+		<section id="devShowcase">
+			<div>
+				<h2></h2>
+				<img class="devJams" src="" alt="">
+				<a href="" target="_blank">BUY ONLINE!</a>
+				<button id="showInventory">SHOW INVENTORY</button>
+			</div>
+			<div id="dev-map"></div>
 		</section>
 
 <!-- Products Showcase -->
 		<section class="product-feature flexContainer" id="productFeature">
-			
+		</section><!-- Product Feature / Handlebars Template -->
+
+<!-- Products Cards -->
+		<section class="product-cards">
+		  	<div class="slide-content cf" id="slideContent">
+			</div><!-- Flickity Gallery / Handlebars Template -->
 		</section>
-	</div>
+	</main>
 
 <!-- Footer -->
-		<footer class="flexContainer wrapper">
-			<div class="footer-one">			
-				<h6>Built by <a href="http://www.danielpierre.io" target="_blank">Daniel Pierre</a>, <a href="http://www.lindsiecanton.com" target="_blank">Lindsie Canton</a>, and <a href="http://www.abenaasomaning.com" target="_blank">Abena Asomaning</a>. 	&copy; 2016 All Rights Reserved.</h6>
+	<footer class="flexContainer">
+		<div class="footerContainer flexContainer wrapper">
+			<div class="footer-one">
+				<h6>Built by <a href="http://www.danielpierre.io" target="_blank">Daniel Pierre,</a> <a href="http://www.lindsiecanton.com" target="_blank">Lindsie Canton,</a> and <a href="http://www.abenaasomaning.com" target="_blank">Abena Asomaning.</a> 	&copy; 2016 All Rights Reserved.</h6>
 			</div>
 			<div class="footer-two flexContainer">
 				<h6>Data Provided by <a href="https://lcboapi.com/" target="_blank"><img src="assets/images/lcboApiLogo.png"></a></h6>
 			</div>
-		</footer>
+		</div>
+	</footer>
 <!-- End Wrapper - Beginning Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>	
