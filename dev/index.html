@@ -18,7 +18,7 @@
 	<link rel="icon" type="image/png" href="assets/images/agave.png">
 
 <!-- Stylesheets and Google Fonts -->
-	<link href='https://fonts.googleapis.com/css?family=Raleway:400,500i,800' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Raleway:400,500i,600' rel='stylesheet' type='text/css'>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://npmcdn.com/flickity@2.0/dist/flickity.min.css">
 	<link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
@@ -38,7 +38,9 @@
 					</div>
 
 					<div class="product-info">
-						<h3 class="product-name">{{name}}</h3>
+						<div class="card-title-box">
+							<h3 class="product-name">{{name}}</h3>
+						</div>
 						<p class="product-style"><span>&ldquo;</span>{{style}}<span>&rdquo;</span></p>
 						<p class="product-size">{{package}}</p>
 						
@@ -71,50 +73,31 @@
 		</div>		
 	</script>
 
-	<style>
-		.product-feature {
-			display: inline-block;
-			margin: 50px auto 0;
-			background-color: #f5f5f5;
-		}
-		.product-showcase {
-			display: flex;
-			justify-content: center;
-		}
-		.showcaseLeft {
-			width: 40%;
-		}
-		.showcaseLeft img {
-			display: block;
-			margin: 0 auto;
-		}
-		.showcaseMiddle {
-			width: 20%;
-		}
-		.showcaseRight {
-			width: 20%;
-		}
-	</style>
 </head>
 
 <body>
 <!-- Hero -->
-	<header class="hero-image">
+	<header>
+		<div class="headerText wrapper flexContainer">
+			<h1>Te Quiero</h1>
+			<h1 class="headKey">Tequila</h1>
+			<h2>Get Lit Your Way!</h2>
+		</div>
 	</header>
 <!-- Beginning Wrapper -->
 	<main class="wrapper">
-		<h1>LCBO Tequila App</h1>
 		<section class="user-data flexContainer">
+			<h2>A quick search will reveal the Tequila of your dreams</h2>
 			<form action="" id="userInputForm">
 
 				<div class="user-data-one flexContainer">
 					<div class="volumeRangeContainer">
-						<label for="volumeRange">V</label>
+						<label for="volumeRange"></label>
 						<input type="range" name="volumeRange" id="volumeRange" min="1" max="3" step="1" default="2">
 					</div>
 
 					<div class="priceRangeContainer">
-						<label for="priceRange">$</label>
+						<label for="priceRange"></label>
 						<input type="range" name="priceRange" id="priceRange" min="1" max="4" step="1" default="2">
 					</div>
 				</div>
@@ -162,12 +145,14 @@
 	</main>
 
 <!-- Footer -->
-	<footer class="flexContainer wrapper">
-		<div class="footer-one">
-			<h6>Built by <a href="http://www.danielpierre.io" target="_blank">Daniel Pierre</a>, <a href="http://www.lindsiecanton.com" target="_blank">Lindsie Canton</a>, and <a href="http://www.abenaasomaning.com" target="_blank">Abena Asomaning</a>. 	&copy; 2016 All Rights Reserved.</h6>
-		</div>
-		<div class="footer-two flexContainer">
-			<h6>Data Provided by <a href="https://lcboapi.com/" target="_blank"><img src="assets/images/lcboApiLogo.png"></a></h6>
+	<footer class="flexContainer">
+		<div class="footerContainer flexContainer wrapper">
+			<div class="footer-one">
+				<h6>Built by <a href="http://www.danielpierre.io" target="_blank">Daniel Pierre,</a> <a href="http://www.lindsiecanton.com" target="_blank">Lindsie Canton,</a> and <a href="http://www.abenaasomaning.com" target="_blank">Abena Asomaning.</a> 	&copy; 2016 All Rights Reserved.</h6>
+			</div>
+			<div class="footer-two flexContainer">
+				<h6>Data Provided by <a href="https://lcboapi.com/" target="_blank"><img src="assets/images/lcboApiLogo.png"></a></h6>
+			</div>
 		</div>
 	</footer>
 <!-- End Wrapper - Beginning Scripts -->
