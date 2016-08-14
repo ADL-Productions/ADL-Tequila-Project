@@ -3,9 +3,10 @@
 var app = {};
 
 // API key, API URL and request header token
-app.lcboApiKey = lcboApiKey;
-app.lcboApiUrl = 'http://lcboapi.com/';
+app.lcboApiKey         = lcboApiKey;
+app.lcboApiUrl         = 'http://lcboapi.com/';
 app.requestHeaderToken = 'Token token=' + app.lcboApiKey;
+app.isFlickity         = false;
 
 // Get user input from form submission in order to filter tequila products
 app.getUserInput = function() {
@@ -55,13 +56,6 @@ app.getProductRange = function(priceRange, volumeRange, userLocation) {
 
 // console.log('data - sorted by price', data);
 
-		// // Filter by categories (get all tequila products for reference)		
-		// var tequilaProducts = data.result.filter(function(obj) {
-		// 	return obj.primary_category === 'Spirits' && obj.secondary_category === 'Tequila';
-		// });
-
-// console.log('all tequila products', tequilaProducts);
-
 		// Filter by categories, user selected price and volume ranges
 		var products = data.result.filter(function(obj) {
 			return obj.primary_category === 'Spirits' && obj.secondary_category === 'Tequila';
@@ -70,24 +64,13 @@ app.getProductRange = function(priceRange, volumeRange, userLocation) {
 		}).filter(function(obj) {
 			return obj.volume_in_milliliters >= volumeRange[0] && obj.volume_in_milliliters <= volumeRange[1];
 		});
-
-		// --- DEV ----------------------------------------------------
-		// Display products on the page -- select menu
-		products.forEach(function(product) {
-			// Create an option element and append to select element
-			var option       = $('<option>').val(product.id),
-				roundedPrice = Math.ceil(product.price_in_cents / 100);
-
-			option.text(`${product.name} ${product.package} \$${roundedPrice}`);
-			$('#productSelection').append(option);
-
-		});
-		// ------------------------------------------------------------
-
-		// Add rounded price and url properties to each product
+		
+		// Add rounded price and url properties to each product, 
+		// and remove a superfluous substring from the origin property
 		products.forEach(function(product) {
 			product.price_in_dollars = Math.ceil(product.price_in_cents / 100);
-			product.product_url = app.utils.getProductUrl(product.name, product.id);
+			product.product_url      = app.utils.getProductUrl(product.name, product.id);
+			product.origin           = app.utils.filterOrigin(product.origin);
 		});
 
 console.log('products', products);
@@ -96,32 +79,55 @@ console.log('no of products', products.length);
 		// Display products on the page in a carousel
 		// Initialize the template
 		var cardTemplate = $('#productCardTemplate').html();
+
 		// Compile the template
 		var compiledCardTemplate = Handlebars.compile(cardTemplate);
+
 		// Pass data from the products object to the template
 		var filledCardTemplate = compiledCardTemplate(products);
+
 		// Append the template to its container
 		$('#slideContent').append(filledCardTemplate);
 
-		// Initialize the carousel container as a flickity gallery
-		$("#slideContent").flickity({
-			wrapAround: true
-		});
+		// Initialize a new Flickity
+		$("#slideContent").flickity({ wrapAround: true });
 
-		// DISPLAY RANDOM PRODUCT IN SHOWCASE SECTION
+		// Check for existing instances of Flickity
+		if (app.isFlickity) {
+			// Destroy the existing Flickity and initialize a new one
+			console.log('there\'s flickity (product range)');
+			$("#slideContent")
+				.flickity('destroy')
+				.flickity({ wrapAround: true });
+		} else {
+			// Initialize a new Flickity
+			$("#slideContent").flickity({ wrapAround: true });
+			// Toggle the Flickity flag
+			app.isFlickity = !app.isFlickity;
+		}
+
+		console.log('isFlickity? (at product range)', app.isFlickity);
+
+		//--- DISPLAY RANDOM PRODUCT IN SHOWCASE SECTION ----------------------
 
 		// Get a randomly selected product to display in the feature section
 		var selectedProduct = app.utils.selectRandomItem(products);
+
 		// Initialize the feature template
 		var featureTemplate = $('#productFeatureTemplate').html();
+
 		// Compile the template
 		var compiledFeatureTemplate = Handlebars.compile(featureTemplate);
+
 		// Pass data from the products object to the template
 		var filledFeatureTemplate = compiledFeatureTemplate(selectedProduct);
-		// Append the template to its container
-		$('#productFeature').append(filledFeatureTemplate);
 
-		// DISPLAY USER-SELECTED PRODUCT IN SHOWCASE SECTION
+		// Append the template to its container
+		$('#productFeature')
+			.empty()
+			.append(filledFeatureTemplate);
+
+		//--- DISPLAY USER-SELECTED PRODUCT IN SHOWCASE SECTION ---------------
 
 		// When the user selects a product from the preview section, display the 
 		// product in the showcase section
@@ -144,62 +150,37 @@ console.log('lcbo url', app.utils.getProductUrl(selectedProduct.name, selectedPr
 
 			// Compile the template
 			var compiledFeatureTemplate = Handlebars.compile(featureTemplate);
+
 			// Pass data from the products object to the template
 			var filledFeatureTemplate = compiledFeatureTemplate(selectedProduct);
-			// Append the template to its container
-			$('#productFeature').empty();
-			$('#productFeature').append(filledFeatureTemplate);
 
+			// Append the template to its container
+			$('#productFeature')
+				.empty()
+				.append(filledFeatureTemplate);
+
+			// When the user clicks on the 'Check Stores' button
 			$('#inventoryBtn').on('click', function(e) {
 				// Prevent default action
 				e.preventDefault();
 
-console.log('selectedProduct', selectedProduct);
-
 				// Set the height of the map container and make it visible
 				$('#map').css('height', '300px').show();
+
+				// Count the number of response pages for inventory data
 				app.countProductAvailabilityPages(selectedProduct, products, userLocation);
 			});
 		});
 
-
-		// --- DEV ----------------------------------------------------
-		// // When the user selects a product from the preview section, display the 
-		// // product in the showcase section -- development mockup
-		// $('#productSelectionForm').on('submit', function(e) {
-		// 	// Prevent default action
-		// 	e.preventDefault();
-
-		// 	// Get the user selection
-		// 	var userSelection = Number($('#productSelection').val());
-
-		// 	// Get the product info from the products array using the selected product's ID
-		// 	var selectedProduct = products.filter(function(product) {
-		// 		return product.id === userSelection;
-		// 	})[0];
-
-		// 	// Display the product image and name, and create a link to the LCBO product page
-		// 	$('#devShowcase .devJams').attr('src', selectedProduct.image_thumb_url);
-		// 	$('#devShowcase h2').text(selectedProduct.name);
-		// 	$('#devShowcase a').attr('href', app.utils.getProductUrl(selectedProduct.name, selectedProduct.id));
-
-		// 	// When the user clicks on the store availability button, display a map
-		// 	// and a list of stores nearest to the user's location
-		// 	$('#showInventory').on('click', function(e) {
-		// 		$('#dev-map').css('height', '300px').show();
-		// 		app.countProductAvailabilityPages(selectedProduct, products, userLocation);
-		// 	});
-		// });
-		// ------------------------------------------------------------
-
+		// When the user clicks on the 'Check Stores' button
 		$('#inventoryBtn').on('click', function(e) {
 			// Prevent default action
 			e.preventDefault();
 
-console.log('selectedProduct', selectedProduct);
-
 			// Set the height of the map container and make it visible
 			$('#map').css('height', '300px').show();
+
+			// Count the number of response pages for inventory data
 			app.countProductAvailabilityPages(selectedProduct, products, userLocation);
 		});
 	});	
@@ -239,9 +220,8 @@ app.countProductAvailabilityPages = function(selectedProduct, products, userLoca
 		} else {
 			var inventories = data.result;
 
-// console.info('inventories (one page)', inventories);
-
-			app.countStoreLocations(inventories, selectedProduct, products, userLocation);
+			// Get locations of stores that stock the selected product
+			app.getStoreLocations(inventories, selectedProduct, products, userLocation);
 		}
 	});
 };
@@ -270,7 +250,6 @@ app.getProductAvailability = function(dataPages, selectedProduct, products, user
     			request.setRequestHeader('Authorization', app.requestHeaderToken);
     		},
     		data: {
-/*! UNCOMMENT THIS !*/
     			product_id: selectedProduct.id,
     			page: page
 		    }
@@ -283,8 +262,6 @@ app.getProductAvailability = function(dataPages, selectedProduct, products, user
 			// This array will contain the data for each of the ajax responses
 			var returnedPages = Array.prototype.slice.call(arguments);
 
-// console.info('returnedPages', returnedPages);
-
 			// Initialize an array to contain store inventories
 			var inventories = [];
 			
@@ -296,15 +273,13 @@ app.getProductAvailability = function(dataPages, selectedProduct, products, user
 			// Flatten results into one array with all the listings
 			inventories = _.flatten(returnedPages);
 
-// console.info('inventories', inventories);
-
-			// Get the store locations
-			app.countStoreLocations(inventories, selectedProduct, products, userLocation);
+			// Get the locations of stores that stock the selected product
+			app.getStoreLocations(inventories, selectedProduct, products, userLocation);
 		});
 };
 
 // Get a count of the number of response pages at the stores endpoint
-app.countStoreLocations = function(inventories, selectedProduct, product, userLocation) {
+app.getStoreLocations = function(inventories, selectedProduct, product, userLocation) {
 
 // console.info('inventories', inventories);
 // console.info('selectedProduct', selectedProduct);
@@ -327,33 +302,26 @@ app.countStoreLocations = function(inventories, selectedProduct, product, userLo
 
 // console.log('store data', data);
 
+		// Get the array of stores
 		var stores = data.result;
-		
-		// stores.forEach(function(store) {
-		// 	console.log(store.address_line_1, store.address_line_2, store.city, store.distance_in_meters);
-		// });
 
 		// Append the inventory of the selected product and related properties to each store
 		stores.forEach(function(store) {
 			for (var i = 0; i < inventories.length; i++) {
 				if (store.store_no === inventories[i].store_no) {
-
-// console.log('store_no', store.store_no);
-
-					store.selected_product_id = inventories[i].product_id;
-					store.selected_product_quantity = inventories[i].quantity;
+					store.selected_product_id         = inventories[i].product_id;
+					store.selected_product_quantity   = inventories[i].quantity;
 					store.selected_product_updated_at = inventories[i].updated_at;
 					store.selected_product_updated_on = inventories[i].updated_on;
 				}
 			} 
 		});
 
-// console.info('stores', stores);
+console.info('stores', stores);
 
+		// Map the stores that stock the selected product
 		app.plotInventoryMap(stores);
-
 	});
-
 };
 
 app.plotInventoryMap = function(stores) {
@@ -364,7 +332,13 @@ app.plotInventoryMap = function(stores) {
 
 	// Initialize the map
 	// app.map = L.map('dev-map');
-	app.map = L.map('map');
+	app.map = L.map('map', { scrollWheelZoom: false });
+
+	// Enable mousewheel scrolling only after the user first
+	// focuses on the map by clicking or tabbing to it
+	app.map.on('focus', function () {
+		app.map.scrollWheelZoom.enable();
+	});
 
 	var CartoDB_Positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
@@ -374,24 +348,24 @@ app.plotInventoryMap = function(stores) {
 
 	// Define a custom marker for stores
 	var storeIcon = L.icon({
-		// 191x494
-		iconSize: [14.4, 40],
-		iconAnchor: [7.2, 40], // [1/10 width, height]
-		popupAnchor:  [-1, -35],
-		iconUrl: 'assets/images/tequila-bottle-solid-icon.png'//,
-		// shadowUrl: 'assets/images/leaflet/marker-shadow.png'
+		// Original size: 64x203
+		// iconSize: [10.6, 33.8],
+		iconSize: [11, 34],
+		// iconAnchor: [6.4, 33.8], // [1/10 width, height]
+		iconAnchor: [6, 34],
+		popupAnchor:  [-1, -30],
+		iconUrl: 'assets/images/bottle-marker.png'
 	});
 
 	// Initialize an array for all markers to be added to the map
 	var markers = [];
 
-	// Iterate through the restaurantsArray
-	// and create a marker for each restaurant
+	// Iterate through the stores array and create a marker for each store
 	stores.forEach(function(store) {
-		// Get the restaurant's coordinates
+		// Get the store's coordinates
 		var latLng = L.latLng(store.latitude, store.longitude);
-		// Calculate the distance to the venue (in kilometres)
-		// var distance = (latLng.distanceTo(eventLatLng) / 1000).toFixed(1);
+
+		// Create a marker using a custom icon and bind popup content to the marker
 		var marker = L.marker(latLng, {
 			icon: storeIcon,
 			alt: store.address_line_1,
@@ -399,18 +373,14 @@ app.plotInventoryMap = function(stores) {
 		}).bindPopup(
 			`
 			<div class="popup-container">
-				<p>
-					${store.address_line_1}<br>
-					${store.city}<br>
-					Distance: ${(store.distance_in_meters / 1000).toFixed(1)} km <br>
-					Quantity: ${store.selected_product_quantity}<br>
-					As of: ${store.selected_product_updated_on}
-				</p>
+				<p class="store-name">${store.name}</p>
+				<p class="store-address">${store.address_line_1}</p>
+				<p class="store-city">${store.city}</p>
+				<p class="store-distance">Distance: ${(store.distance_in_meters / 1000).toFixed(1)} km</p>
+				<p class="store-product-qty">Quantity: ${store.selected_product_quantity}</p>		
 			</div>
 			`
 		);
-
-// console.log('marker', marker);
 
 		// Add the marker to the marker array
 		markers.push(marker);
@@ -432,7 +402,6 @@ app.plotInventoryMap = function(stores) {
 // Scroll to top and reload the page
 app.reset = function() {
 	$('.reset').on('click', function() {
-		// window.scrollTo(0,0);
 		$('html, body')
 			.animate({ scrollTop: 0 }, 1000)
 			.queue(function () {
@@ -461,6 +430,11 @@ app.utils = {
 	getProductUrl: function(name, id) {
 		var baseUrl = 'http://www.lcbo.com/lcbo/product/';
 		return baseUrl + name.toLowerCase().replace(/\s/g, '-') + '/' + id;
+	},
+	// Remove ", Region Not Specified" from product origin property value
+	filterOrigin: function(string) {
+		var replaceStr = ', Region Not Specified';
+		return string.replace(new RegExp('\\b' + replaceStr + '\\b','gi'),'');
 	},
 	// Select a random item from an array
 	selectRandomItem: function(array) {
