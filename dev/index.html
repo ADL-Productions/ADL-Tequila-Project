@@ -58,7 +58,7 @@
 			{{#if image_url}}
 				<img src="{{image_url}}" alt="{{name}}">
 			{{else}}
-				<img src="assets/images/bottle-placeholder.png" alt="{{name}}">
+				<img src="assets/images/bottle-placeholder-large.png" alt="{{name}}">
 			{{/if}}
 			</div>
 			<div class="showcaseMiddle">
@@ -74,7 +74,9 @@
 				</div>
 				<div class="feature-btn-group">
 					<button type="button "id="inventoryBtn" class="feature-btn inventory-btn">Check Stores</button>
-					<a id="buyOnlineBtn" class="feature-btn buy-online-btn" href="{{product_url}}" target="_blank">Buy Online</a>
+					<div class="feature-btn-container">
+						<a id="buyOnlineBtn" class="feature-btn buy-online-btn" href="{{product_url}}" target="_blank">Buy Online</a>
+					</div>
 				</div>
 				<div id="map" class="map"></div>
 			</div>
@@ -87,7 +89,7 @@
 	<header id="top">
 		<div class="headerText wrapper flexContainer">
 			<h1>Te Quiero</h1>
-			<h1 class="headKey">Tequila</h1>
+			<h1 class="headKey">Tequila<img src="../assets/images/adl-logo.svg" alt=""></h1>
 			<h2>Get Lit Your Way!</h2>
 		</div>
 	</header>
