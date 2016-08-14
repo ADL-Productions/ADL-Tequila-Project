@@ -61,15 +61,17 @@
 				<img src="assets/images/bottle-placeholder-large.png" alt="{{name}}">
 			{{/if}}
 				<div class="priceContainer">
-					<p><span>$</span>{{price_in_dollars}}</p>
+					<span>$</span>{{price_in_dollars}}
 				</div>
 			</div>
 			<div class="showcaseMiddle">
 				<h2>{{name}}</h2>
+				<h3 class="style"><span>&ldquo;</span>{{style}}<span>&rdquo;</span></h3>
 				<p>{{package}}</p>
 				<p>By: {{producer_name}} </p>
 				<p>Product of {{origin}}</p>
-				<h3><span>&ldquo;</span>{{style}}<span>&rdquo;</span></h3>
+				<p>Type: {{tertiary_category}}</p>
+
 			</div>
 			<div class="showcaseRight">
 				<div id="map" class="map"></div>
