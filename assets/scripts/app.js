@@ -409,7 +409,16 @@ app.reset = function() {
 				// $(this).dequeue();
 			});
 	});
+
+	var $volRange = $('#volumeRange');
+	$volRange.change(function(){
+		var curVal = $(this).val();
+		// console.log("it's the cur val!", curVal);
+		
+	});
 }
+
+
 
 // UTILITY FUNCTIONS
 app.utils = {
