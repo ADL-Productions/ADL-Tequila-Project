@@ -36,7 +36,12 @@ app.getUserInput = function() {
 		volumeRange = app.utils.getVolumeRange(Number(volumeRange));
 
 		// Get products matching user search
-		app.getProductRange(priceRange, volumeRange, userLocation);	
+		app.getProductRange(priceRange, volumeRange, userLocation);
+
+		// Scroll to the product feature section
+		$('html, body').animate({
+			scrollTop: $('.product-cards').offset().top - 20
+		}, 750);
 	});
 }
 
@@ -159,6 +164,11 @@ console.log('lcbo url', app.utils.getProductUrl(selectedProduct.name, selectedPr
 			$('#productFeature')
 				.empty()
 				.append(filledFeatureTemplate);
+
+			// Scroll to the product feature section
+			$('html, body').animate({
+				scrollTop: $('#productFeature').offset().top + 20
+			}, 1000);
 
 			// When the user clicks on the 'Check Stores' button
 			$('#inventoryBtn').on('click', function(e) {
