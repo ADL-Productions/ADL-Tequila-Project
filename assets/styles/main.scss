@@ -44,6 +44,11 @@ h3 {
 	font-size: 30px;
 	padding-top:0px;
 	font-weight:500i;
+	line-height:20px;
+	color:$brown;
+}
+
+h3.style {
 	font-style:italic;
 }
 
@@ -59,7 +64,8 @@ a {
 
 p {
 	text-align: left;
-	line-height:4px;
+	line-height: 15px;
+	color:lighten($grey,35%);
 }
 
 .logo {
@@ -281,8 +287,12 @@ header h2 {
 	// margin: 20px;
 }
 
-//  Flickity Gallery Cards
+// Map 
+ .map {
+ 	margin-bottom: 30px;
+ }
 
+//  Flickity Gallery Cards
 html {
   box-sizing: border-box;
 }
@@ -373,14 +383,6 @@ span.dollar-sign {
 	border: 1px solid #E6E9ED;
 }
 
-// .slide-content {
-// 	width: 100%;
-// }
-
-// .courses {
-// 	margin-top: 30px;
-// 	margin-bottom: 10px;
-// }
 .product-item {
 	width: 33.3333%;
 	padding-right: 2%;
@@ -401,27 +403,6 @@ span.dollar-sign {
 	background-color: #fbfbfb;
 	border-top: 1px solid #e1e1e1;
 }
-// .product-topic {
-// 	// font-weight: 500;
-// 	color: #AAB2BD;
-// 	font-size: 12px;
-// 	margin-bottom: 5px;
-// }
-// .product-topic.photo {
-// 	color: #673AB7;
-// }
-// .product-topic.webdesign {
-// 	color: #009688;
-// }
-// .product-topic.computer {
-// 	color: #2196F3;
-// }
-// .product-topic.code {
-// 	color: #4CAF50;
-// }
-// .product-topic.design {
-// 	color: #F44336;
-// }
 
 .card-title-box {
 	height: 60px;
@@ -445,28 +426,6 @@ span.dollar-sign {
 .product-style span {
 	font-size: 18px;
 }
-
-// .product-meta {
-// 	color: #AAB2BD;
-// 	// font-weight: 300;
-// 	font-size: 11px;
-// 	position: absolute;
-// 	left: 7%;
-// 	bottom: 7%;
-// }
-// .product-duration:before {
-// 	display: inline-block;
-// 	content: "";
-// 	padding-right: 5px;
-// 	padding-left: 5px;
-// }
-// .aption {
-// 	position: absolute;
-// 	right: 5%;
-// 	bottom: 5%;
-// 	font-size: 18px;
-// 	color: #AAB2BD;
-// }
 
 // FEATURE CARD STYLES
 
@@ -510,11 +469,12 @@ span.dollar-sign {
 
 .priceContainer {
 	position: absolute;
-	right: 15px;
-	top: 15px;
+	right: 20px;
+	top: 20px;
 	background-color: lighten($green,20%);
 	font-size: 28px;
-	padding: 2px 13px;
+	padding: 13px 20px 21px 20px;
+	font-color: $grey;
 }
 
 .priceContainer span {
@@ -660,3 +620,32 @@ footer a {
 	padding: 30px;
 	width: 30%;
 }
+
+//Queries 
+@media (min-width: 760px) and (max-width: 940px) {
+	.cf {
+		width: 45%;
+		*zoom: 1;
+		width: 45%;
+	}
+}
+
+@media (min-width: 480px) and (max-width: 760px) {
+
+	h3.style {
+		font-size:30px;
+		line-height:40px;
+	}
+
+	p {
+		line-height:60px;
+	}
+
+	.cf {
+		width: 100%;
+		*zoom: 1;
+		width: 100%;
+	}
+}
+// @media (min-width: 0px) and (max-width: 460px) {}
+

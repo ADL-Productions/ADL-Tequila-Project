@@ -76,6 +76,7 @@ app.getProductRange = function(priceRange, volumeRange, userLocation) {
 			product.price_in_dollars = Math.ceil(product.price_in_cents / 100);
 			product.product_url      = app.utils.getProductUrl(product.name, product.id);
 			product.origin           = app.utils.filterOrigin(product.origin);
+			product.tertiary_category = app.utils.filterCategory(product.tertiary_category);
 		});
 
 console.log('products', products);
@@ -451,6 +452,11 @@ app.utils = {
 	filterOrigin: function(string) {
 		var replaceStr = ', Region Not Specified';
 		return string.replace(new RegExp('\\b' + replaceStr + '\\b','gi'),'');
+	},
+	//Replace 'Null' result with empty string
+	filterCategory: function(string) {
+		return string === null ? 'Mixto':
+						  string;	
 	},
 	// Select a random item from an array
 	selectRandomItem: function(array) {
