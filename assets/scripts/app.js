@@ -485,10 +485,9 @@ app.utils = {
 		var replaceStr = ', Region Not Specified';
 		return string.replace(new RegExp('\\b' + replaceStr + '\\b','gi'),'');
 	},
-	//Replace 'Null' result with empty string
+	// Replace 'Null' result with empty string
 	filterCategory: function(string) {
-		return string === null ? 'Mixto':
-						  string;	
+		return string === null ? '': 'Type: ' + string;	
 	},
 	// Select a random item from an array
 	selectRandomItem: function(array) {
