@@ -459,6 +459,12 @@ span.dollar-sign {
 	background-color: transparent;
 	border: 4px solid #8DDE92;
 	width: 185px;
+	transition: 0.35s ease-in-out;
+}
+
+.feature-btn:hover {
+	background-color: $green;
+	color: white;
 }
 
 .feature-btn:focus {
@@ -533,18 +539,14 @@ footer a {
 	// background-color: #fff;
 }
 
-.leaflet-popup-content-wrapper {
+.leaflet-popup-content-wrapper,
+.leaflet-control-zoom.leaflet-bar.leaflet-control,
+.leaflet-control-fullscreen.leaflet-bar.leaflet-control,
+.leaflet-control-fullscreen-button.leaflet-bar-part,
+.leaflet-control-fullscreen a,
+.leaflet-bar a:first-child,
+.leaflet-bar a:last-child {
 	border-radius: 0;
-
-	// a {
-	// 	color: #333;
-	// 	text-decoration: none;
-
-	// 	&:hover {
-	// 		color: #0078a8;
-	// 		text-decoration: none;
-	// 	}
-	// }
 }
 
 .leaflet-popup-content {
@@ -565,30 +567,10 @@ footer a {
 }
 
 .leaflet-control-attribution.leaflet-control {
-	background: rgba(255, 255, 255, 0.1);
+	background: rgba(255, 255, 255, 0.3);
 	color: #999;
 
 	a {
 		color: #999;
 	}
-}
-
-.leaflet-bar a {
-	// background-color: rgba(255, 255, 255, 0.3);
-
-	// &:hover {
-	// 	background-color: rgba(255, 255, 255, 0.5);
-	// }
-}
-
-.leaflet-control-fullscreen a {
-	border-radius: 0;
-}
-
-.leaflet-control-fullscreen.leaflet-bar.leaflet-control {
-	border-radius: 0;
-}
-
-.leaflet-control-zoom.leaflet-bar.leaflet-control {
-	border-radius: 0;
 }
