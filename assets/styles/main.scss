@@ -254,6 +254,7 @@ html {
 }
 .cf {
   *zoom: 1;
+  width: 33.333%;
 }
 img {
   max-width: 100%;
@@ -535,14 +536,31 @@ footer a {
 .leaflet-popup-content-wrapper {
 	border-radius: 0;
 
-	a {
-		color: #333;
-		text-decoration: none;
+	// a {
+	// 	color: #333;
+	// 	text-decoration: none;
 
-		&:hover {
-			color: #0078a8;
-			text-decoration: none;
-		}
+	// 	&:hover {
+	// 		color: #0078a8;
+	// 		text-decoration: none;
+	// 	}
+	// }
+}
+
+.leaflet-popup-content {
+	font-family: 'Raleway', sans-serif;
+	color: $grey;
+
+	p {
+		margin: 0;
+	}
+
+	.store-name {
+		font-weight: bold;
+	}
+
+	.store-city {
+		margin-bottom: 5px;
 	}
 }
 

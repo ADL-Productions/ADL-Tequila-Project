@@ -88,6 +88,7 @@ app.getProductRange = function(priceRange, volumeRange, userLocation) {
 		products.forEach(function(product) {
 			product.price_in_dollars = Math.ceil(product.price_in_cents / 100);
 			product.product_url = app.utils.getProductUrl(product.name, product.id);
+			product.origin = app.utils.filterOrigin(product.origin);
 		});
 
 console.log('products', products);
@@ -348,7 +349,7 @@ app.countStoreLocations = function(inventories, selectedProduct, product, userLo
 			} 
 		});
 
-// console.info('stores', stores);
+console.info('stores', stores);
 
 		app.plotInventoryMap(stores);
 
@@ -374,12 +375,17 @@ app.plotInventoryMap = function(stores) {
 
 	// Define a custom marker for stores
 	var storeIcon = L.icon({
-		// 191x494
-		iconSize: [14.4, 40],
-		iconAnchor: [7.2, 40], // [1/10 width, height]
-		popupAnchor:  [-1, -35],
-		iconUrl: 'assets/images/tequila-bottle-solid-icon.png'//,
-		// shadowUrl: 'assets/images/leaflet/marker-shadow.png'
+		// // 191x494
+		// iconSize: [14.4, 40],
+		// iconAnchor: [7.2, 40], // [1/10 width, height]
+		// popupAnchor:  [-1, -35],
+		// // iconUrl: 'assets/images/tequila-bottle-solid-icon.png'
+
+		//64x203
+		iconSize: [10.6, 33.8],
+		iconAnchor: [6.4, 33.8], // [1/10 width, height]
+		popupAnchor:  [-1, -30],
+		iconUrl: 'assets/images/bottle-marker.png'
 	});
 
 	// Initialize an array for all markers to be added to the map
@@ -399,16 +405,16 @@ app.plotInventoryMap = function(stores) {
 		}).bindPopup(
 			`
 			<div class="popup-container">
-				<p>
-					${store.address_line_1}<br>
-					${store.city}<br>
-					Distance: ${(store.distance_in_meters / 1000).toFixed(1)} km <br>
-					Quantity: ${store.selected_product_quantity}<br>
-					As of: ${store.selected_product_updated_on}
-				</p>
+				<p class="store-name">${store.name}</p>
+				<p class="store-address">${store.address_line_1}</p>
+				<p class="store-city">${store.city}</p>
+				<p class="store-distance">Distance: ${(store.distance_in_meters / 1000).toFixed(1)} km</p>
+				<p class="store-product-qty">Quantity: ${store.selected_product_quantity}</p>		
 			</div>
 			`
 		);
+
+		// <p class="store-stock-date">As of: ${store.selected_product_updated_on}</p>
 
 // console.log('marker', marker);
 
@@ -461,6 +467,11 @@ app.utils = {
 	getProductUrl: function(name, id) {
 		var baseUrl = 'http://www.lcbo.com/lcbo/product/';
 		return baseUrl + name.toLowerCase().replace(/\s/g, '-') + '/' + id;
+	},
+	// Remove ', Region Not Specified' from product origin property
+	filterOrigin: function(string) {
+		var replaceStr = ', Region Not Specified';
+		return string.replace(new RegExp('\\b' + replaceStr + '\\b','gi'),'');
 	},
 	// Select a random item from an array
 	selectRandomItem: function(array) {
