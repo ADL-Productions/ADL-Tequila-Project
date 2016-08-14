@@ -61,17 +61,15 @@
 				<img src="assets/images/bottle-placeholder-large.png" alt="{{name}}">
 			{{/if}}
 				<div class="priceContainer">
-					<span>$</span>{{price_in_dollars}}
+					<p><span>$</span>{{price_in_dollars}}</p>
 				</div>
 			</div>
 			<div class="showcaseMiddle">
 				<h2>{{name}}</h2>
-				<h3 class="style"><span>&ldquo;</span>{{style}}<span>&rdquo;</span></h3>
 				<p>{{package}}</p>
 				<p>By: {{producer_name}} </p>
 				<p>Product of {{origin}}</p>
-				<p>Type: {{tertiary_category}}</p>
-
+				<h3><span>&ldquo;</span>{{style}}<span>&rdquo;</span></h3>
 			</div>
 			<div class="showcaseRight">
 				<div id="map" class="map"></div>
@@ -103,20 +101,20 @@
 
 				<div class="user-data-one flexContainer">
 					<div class="volumeRangeContainer">
-						<div class="volImageContainer">
-							<img src="../assets/images/bottle-marker-range.png" alt="bottle volume" class="volImage">
-						</div>
-						<label for="volumeRange"></label>
+						<label for="volumeRange">
+							<div class="volImageContainer">
+								<img src="./assets/images/bottle-marker-range.png" alt="bottle volume" class="volImage">
+							</div>
+						</label>
 						<input type="range" name="volumeRange" id="volumeRange" min="1" max="3" step="1" default="2">
-<!-- 					<datalist id="volStepList">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-						</datalist> -->
 					</div>
 
 					<div class="priceRangeContainer">
-						<label for="priceRange"></label>
+						<label for="priceRange">
+							<div class="priceImageContainer">
+								<img src="./assets/images/dollar-sign.png" alt="bottle price" class="priceImage">
+							</div>
+						</label>
 						<input type="range" name="priceRange" id="priceRange" min="1" max="4" step="1" default="2">
 					</div>
 				</div>

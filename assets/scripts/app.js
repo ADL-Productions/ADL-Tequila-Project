@@ -36,7 +36,12 @@ app.getUserInput = function() {
 		volumeRange = app.utils.getVolumeRange(Number(volumeRange));
 
 		// Get products matching user search
-		app.getProductRange(priceRange, volumeRange, userLocation);	
+		app.getProductRange(priceRange, volumeRange, userLocation);
+
+		// Scroll to the product feature section
+		$('html, body').animate({
+			scrollTop: $('.product-cards').offset().top - 20
+		}, 750);
 	});
 }
 
@@ -160,6 +165,11 @@ console.log('lcbo url', app.utils.getProductUrl(selectedProduct.name, selectedPr
 			$('#productFeature')
 				.empty()
 				.append(filledFeatureTemplate);
+
+			// Scroll to the product feature section
+			$('html, body').animate({
+				scrollTop: $('#productFeature').offset().top + 20
+			}, 1000);
 
 			// When the user clicks on the 'Check Stores' button
 			$('#inventoryBtn').on('click', function(e) {
@@ -401,8 +411,9 @@ app.plotInventoryMap = function(stores) {
 	L.control.fullscreen().addTo(app.map);
 };
 
-// Scroll to top and reload the page
+// Event handlers for user interface
 app.reset = function() {
+	// Scroll to top and reload the page
 	$('.reset').on('click', function() {
 		$('html, body')
 			.animate({ scrollTop: 0 }, 1000)
@@ -412,16 +423,37 @@ app.reset = function() {
 			});
 	});
 
-	var $volRange = $('#volumeRange');
-	var $image = $(".volImage");
-	$volRange.change(function(){
+	// Animate size of volume range input symbols
+	var $volRange = $('#volumeRange'),
+		$volImage = $('.volImage');
+
+	$volRange.change(function() {
 		var curVal = $(this).val();
-		console.log("it's the cur val!", curVal);
-		if (curVal === 3) {
-			$image.animate({height : "90px"},500)
-			// $image.css('height', 25);
-			// $image.css({"border: 1px solid red"});
-			console.log($image)
+
+		if (curVal == 3) {
+			$volImage.animate({height: "90px"}, "fast");
+		} else if (curVal == 2){
+			$volImage.animate({height: "65px"}, "fast");
+		} else {
+			$volImage.animate({height: "40px"}, "fast");
+		}
+	});
+
+	// Animate size of price range input symbols
+	var $priceRange = $('#priceRange'),
+		$priceImage = $('.priceImage');
+
+	$priceRange.change(function() {
+		var curVal = $(this).val();
+
+		if (curVal == 4) {
+			$priceImage.animate({height: "90px"}, "fast");
+		} else if (curVal == 3){
+			$priceImage.animate({height: "75px"}, "fast");
+		} else if (curVal == 2){
+			$priceImage.animate({height: "60px"}, "fast");
+		} else {
+			$priceImage.animate({height: "45px"}, "fast");
 		}
 	});
 }

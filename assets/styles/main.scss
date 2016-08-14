@@ -203,7 +203,8 @@ header h2 {
   outline: 0;
 }
 
-.volumeRangeContainer input[type="range"]::-webkit-slider-thumb, .priceRangeContainer input[type="range"]::-webkit-slider-thumb {
+.volumeRangeContainer input[type="range"]::-webkit-slider-thumb, 
+.priceRangeContainer input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   background-color: $green;
   width: 30px;
@@ -211,17 +212,19 @@ header h2 {
   border-radius: 50%;
   border: 2px solid white;
   cursor: pointer;
-  transition: .3s ease-in-out;
-}​
+  transition: 0.3s ease-in-out;
+}
 
-.volumeRangeContainer input[type="range"]::-webkit-slider-thumb:hover, .priceRangeContainer input[type="range"]::-webkit-slider-thumb:hover {
+.volumeRangeContainer input[type="range"]::-webkit-slider-thumb:hover, 
+.priceRangeContainer input[type="range"]::-webkit-slider-thumb:hover {
     background-color: white;
     border: 2px solid $green;
 }
 
-.volumeRangeContainer input[type="range"]::-webkit-slider-thumb:active, .priceRangeContainer input[type="range"]::-webkit-slider-thumb:active {
+.volumeRangeContainer input[type="range"]::-webkit-slider-thumb:active, 
+.priceRangeContainer input[type="range"]::-webkit-slider-thumb:active {
     transform: scale(1.3);
-  }
+}
 
 .priceRangeContainer, .textInput {
 	width: 60%;
@@ -263,28 +266,44 @@ header h2 {
 	color: $green;
 	background-color: transparent;
 	border: 4px solid $green;
+
+	&:hover {
+		background-color: #fbfbfb;
+	}
+
+	&:focus {
+		background-color: #fbfbfb;
+	}
 }
 
-.textInput input:focus, .submitInput input:focus {
-	outline: 3px solid darken($green,30%);;
+.textInput input:focus, .submitInput input:focus, .reset:focus {
+	outline: 3px solid darken($green,30%);
 }
 
 // RANGE STYLE ON CHANGE
 
-.volImageContainer {
+.volImageContainer,
+.priceImageContainer {
 	position: relative;
-	// text-align: center;
+	height: 90px;
+	margin-bottom: 20px;
 }
 
-.volImage {
+.volImage,
+.priceImage {
 	position: absolute;
-	bottom: 20px;
+	bottom: 0;
 	right: 0;
 	left: 0;
 	margin: 0 auto;
-	// display: block;
+}
+
+.volImage {
 	height: 65px;
-	// margin: 20px;
+}
+
+.priceImage {
+	height: 75px;
 }
 
 // Map 
@@ -619,6 +638,12 @@ footer a {
 	margin: 0 auto;
 	padding: 30px;
 	width: 30%;
+	transition: 0.35s ease-in-out;
+
+	&:hover {
+		background-color: $green;
+		color: white;		
+	}
 }
 
 //Queries 
@@ -648,4 +673,3 @@ footer a {
 	}
 }
 // @media (min-width: 0px) and (max-width: 460px) {}
-
