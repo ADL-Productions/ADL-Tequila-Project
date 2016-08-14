@@ -420,7 +420,22 @@ app.reset = function() {
 				// $(this).dequeue();
 			});
 	});
+
+	var $volRange = $('#volumeRange');
+	var $image = $(".volImage");
+	$volRange.change(function(){
+		var curVal = $(this).val();
+		console.log("it's the cur val!", curVal);
+		if (curVal === 3) {
+			$image.animate({height : "90px"},500)
+			// $image.css('height', 25);
+			// $image.css({"border: 1px solid red"});
+			console.log($image)
+		}
+	});
 }
+
+
 
 // UTILITY FUNCTIONS
 app.utils = {

@@ -96,13 +96,21 @@
 <!-- Beginning Wrapper -->
 	<main class="wrapper">
 		<section class="user-data flexContainer">
-			<h2>A quick search will reveal the Tequila of your dreams</h2>
+			<h2>A quick search will reveal the tequila of your dreams.</h2>
 			<form action="" id="userInputForm">
 
 				<div class="user-data-one flexContainer">
 					<div class="volumeRangeContainer">
+						<div class="volImageContainer">
+							<img src="../assets/images/bottle-marker-range.png" alt="bottle volume" class="volImage">
+						</div>
 						<label for="volumeRange"></label>
 						<input type="range" name="volumeRange" id="volumeRange" min="1" max="3" step="1" default="2">
+<!-- 					<datalist id="volStepList">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+						</datalist> -->
 					</div>
 
 					<div class="priceRangeContainer">
@@ -146,7 +154,7 @@
 			<div class="footer-two flexContainer">
 				<h6>Data Provided by <a href="https://lcboapi.com/" target="_blank"><img src="assets/images/lcboApiLogo.png"></a></h6>
 			</div>
-			<div class="social-media-icons">
+			<div class="social-media-icons flexContainer">
 				<h6>Share with a friend 
 				<a href="http://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="lcbo.com"target="_blank">Tweet</a></h6>
 			</div>
