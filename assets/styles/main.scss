@@ -485,16 +485,19 @@ span.dollar-sign {
 	width: 33.333%;
 	border-right: solid 1px #e1e1e1;
 	background-color:$white;
+	position: relative;
 }
 .showcaseLeft img {
 	display: block;
 	margin: 0 auto;
 }
+
 .showcaseMiddle {
 	width: 33.333%;
 	background-color: #fbfbfb;
 	padding: 20px 30px 30px 30px ;
 }
+
 .showcaseMiddle h2 {
 	color: $green;
 }
@@ -504,9 +507,25 @@ span.dollar-sign {
 	background-color: #fbfbfb;
 	padding: 20px 30px 30px 30px;
 }
-.priceVolume p {
-	text-align: right;
+
+.priceContainer {
+	position: absolute;
+	right: 15px;
+	top: 15px;
+	background-color: lighten($green,20%);
+	font-size: 28px;
+	padding: 2px 13px;
 }
+
+.priceContainer span {
+	font-size: 17px;
+}
+
+.feature-btn-group {
+	flex-direction: column;
+	text-align: center; 
+}
+
 .feature-btn {
 	padding: 8px 16px;
 	letter-spacing: 2px;

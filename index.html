@@ -54,31 +54,31 @@
 	</script>
 	<script id="productFeatureTemplate" type="x-handlebars-template">
 		<div class="product-showcase">
-			<div class="showcaseLeft">
+			<div class="showcaseLeft flexContainer">
 			{{#if image_url}}
 				<img src="{{image_url}}" alt="{{name}}">
 			{{else}}
 				<img src="assets/images/bottle-placeholder-large.png" alt="{{name}}">
 			{{/if}}
+				<div class="priceContainer">
+					<p><span>$</span>{{price_in_dollars}}</p>
+				</div>
 			</div>
 			<div class="showcaseMiddle">
 				<h2>{{name}}</h2>
+				<p>{{package}}</p>
 				<p>By: {{producer_name}} </p>
 				<p>Product of {{origin}}</p>
 				<h3><span>&ldquo;</span>{{style}}<span>&rdquo;</span></h3>
 			</div>
 			<div class="showcaseRight">
-				<div class="priceVolume">
-					<p><span class="dollar-sign">$</span>{{price_in_dollars}}</p>
-					<p>{{package}}</p>
-				</div>
-				<div class="feature-btn-group">
+				<div id="map" class="map"></div>
+				<div class="feature-btn-group flexContainer">
 					<button type="button "id="inventoryBtn" class="feature-btn inventory-btn">Find Location</button>
 					<div class="feature-btn-container">
 						<a id="buyOnlineBtn" class="feature-btn buy-online-btn" href="{{product_url}}" target="_blank">Buy Online</a>
 					</div>
 				</div>
-				<div id="map" class="map"></div>
 			</div>
 		</div>		
 	</script>
