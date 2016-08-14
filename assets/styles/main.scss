@@ -72,7 +72,7 @@ header {
 	background: url("../images/hero.svg") repeat;
 	background-attachment: fixed;
 	background-color: rgba(141,222,146,0.4);
-	background-size: cover;
+	// background-size: cover;
 	max-height: 550px;
 	height: 80vh;
 }
@@ -85,11 +85,16 @@ header {
 }
 
 h1 {
+	color: $brown;
 	font-size: 100px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	line-height: 1em;
 	margin: 0;
+}
+
+header h2 {
+	color: $grey;
 }
 
 .headKey {
@@ -132,6 +137,11 @@ h1 {
 	margin: 90px 0 0 0;
 }
 
+.user-data h2 {
+	color: $brown;
+	margin-bottom: 90px;
+}
+
 #userInputForm {
 	width: 100%;
 	margin: 0 auto;
@@ -160,19 +170,23 @@ h1 {
 	color: white;
 }
 
-.volumeRangeContainer {
+.volumeRangeContainer, .priceRangeContainer {
   text-align: center;
   font-weight: bold;
   font-size: 10em;
   width: 300px; 
-  height: 100px;
+  // height: 100px;
   line-height: 60px;
   margin: 40px auto;
   letter-spacing: -.07em;
   text-shadow: white 2px 2px 2px;
 }
 
-.volumeRangeContainer input[type="range"] {
+.priceRangeContainer {
+	margin-left: 78px;
+}
+
+.volumeRangeContainer input[type="range"], .priceRangeContainer input[type="range"] {
   display: block;
   -webkit-appearance: none;
   background-color: lighten($grey,35%);
@@ -183,7 +197,7 @@ h1 {
   outline: 0;
 }
 
-.volumeRangeContainer input[type="range"]::-webkit-slider-thumb {
+.volumeRangeContainer input[type="range"]::-webkit-slider-thumb, .priceRangeContainer input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   background-color: $green;
   width: 30px;
@@ -194,13 +208,13 @@ h1 {
   transition: .3s ease-in-out;
 }​
 
-.volumeRangeContainer input[type="range"]::-webkit-slider-thumb:hover {
+.volumeRangeContainer input[type="range"]::-webkit-slider-thumb:hover, .priceRangeContainer input[type="range"]::-webkit-slider-thumb:hover {
     background-color: white;
     border: 2px solid $green;
 }
 
-.volumeRangeContainer input[type="range"]::-webkit-slider-thumb:active {
-    transform: scale(1.6);
+.volumeRangeContainer input[type="range"]::-webkit-slider-thumb:active, .priceRangeContainer input[type="range"]::-webkit-slider-thumb:active {
+    transform: scale(1.3);
   }
 
 .priceRangeContainer, .textInput {
@@ -214,7 +228,6 @@ h1 {
 
 #priceRange, #userLocation {
 	width: 100%;
-	height: 60px;
 	margin: 0;
 }
 
@@ -248,6 +261,24 @@ h1 {
 
 .textInput input:focus, .submitInput input:focus {
 	outline: 3px solid darken($green,30%);;
+}
+
+// RANGE STYLE ON CHANGE
+
+.volImageContainer {
+	position: relative;
+	// text-align: center;
+}
+
+.volImage {
+	position: absolute;
+	bottom: 20px;
+	right: 0;
+	left: 0;
+	margin: 0 auto;
+	// display: block;
+	height: 65px;
+	// margin: 20px;
 }
 
 //  Flickity Gallery Cards
@@ -509,7 +540,7 @@ span.dollar-sign {
 // FOOTER STYLES 
 
 footer {
-	color: $seafoam;
+	color: $whitesmoke;
 	padding: 15px 0 15px 0;
 	background-color: lighten($grey, 10%);
 	justify-content: center;
