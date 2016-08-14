@@ -26,6 +26,11 @@ app.getUserInput = function() {
 		$('#volumeRange').empty();
 		$('#userLocation').empty();
 
+		// Remove any existent product cards
+		$('.product.cf').remove();
+
+// console.log('isFlickity? (submit)', app.isFlickity);
+
 		// Convert price and volume values to ranges
 		priceRange  = app.utils.getPriceRange(Number(priceRange));
 		volumeRange = app.utils.getVolumeRange(Number(volumeRange));
@@ -89,13 +94,9 @@ console.log('no of products', products.length);
 		// Append the template to its container
 		$('#slideContent').append(filledCardTemplate);
 
-		// Initialize a new Flickity
-		$("#slideContent").flickity({ wrapAround: true });
-
 		// Check for existing instances of Flickity
 		if (app.isFlickity) {
 			// Destroy the existing Flickity and initialize a new one
-			console.log('there\'s flickity (product range)');
 			$("#slideContent")
 				.flickity('destroy')
 				.flickity({ wrapAround: true });
@@ -106,7 +107,7 @@ console.log('no of products', products.length);
 			app.isFlickity = !app.isFlickity;
 		}
 
-		console.log('isFlickity? (at product range)', app.isFlickity);
+// console.log('isFlickity? (cards)', app.isFlickity);		
 
 		//--- DISPLAY RANDOM PRODUCT IN SHOWCASE SECTION ----------------------
 
@@ -411,10 +412,16 @@ app.reset = function() {
 	});
 
 	var $volRange = $('#volumeRange');
+	var $image = $(".volImage");
 	$volRange.change(function(){
 		var curVal = $(this).val();
-		// console.log("it's the cur val!", curVal);
-		
+		console.log("it's the cur val!", curVal);
+		if (curVal === 3) {
+			$image.animate({height : "90px"},500)
+			// $image.css('height', 25);
+			// $image.css({"border: 1px solid red"});
+			console.log($image)
+		}
 	});
 }
 
