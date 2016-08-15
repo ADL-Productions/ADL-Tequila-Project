@@ -81,6 +81,11 @@ app.getProductRange = function(priceRange, volumeRange, userLocation) {
 			product.price_in_dollars  = Math.ceil(product.price_in_cents / 100);
 			product.product_url       = app.utils.getProductUrl(product.name, product.id);
 			product.origin            = app.utils.filterOrigin(product.origin);
+			product.price_in_dollars  = Math.ceil(product.price_in_cents / 100);
+			product.product_url       = app.utils.getProductUrl(product.name, product.id);
+			product.origin            = app.utils.filterOrigin(product.origin);
+			product.type_translation  = app.utils.translateCategory(product.tertiary_category);
+			product.type_description  = app.utils.describeCategory(product.tertiary_category);
 			product.tertiary_category = app.utils.filterCategory(product.tertiary_category);
 		});
 
@@ -493,6 +498,35 @@ app.utils = {
 	selectRandomItem: function(array) {
 		var index = Math.floor(Math.random() * array.length);
 		return array[index];
+	},
+
+	translateCategory: function(string) {
+		if (string === null){
+			return '';
+		}
+
+		string = string.toLowerCase();
+		return string === 'mixto' ? 'Mixed':
+		       string === 'blanco' ? 'White':
+		       string === 'reposado' ? 'Rested':
+		       string === 'anejo' ? 'Aged':
+		       string === 'mezcal' ? 'Oven-cooked Agave':
+		       '';
+	},
+
+	describeCategory: function(string) {
+		if (string === null){
+			return '';
+		}
+		
+		string = string.toLowerCase();
+		return string === 'mixto' ? 'Mixtos use a minimum of 51% blue Agave, and uses cane and other sugars to make up the remainder.':
+		       string === 'blanco' ? 'A white spirit, un-aged and bottled immediately, or aged for less than two months.':
+		       string === 'reposado' ? 'Aged between two and twelve months in oak barrels.':
+		       string === 'anejo' ? 'Aged in oak barrels between one and three years.':
+		       string === 'mezcal' ? 'Mezcal is generally consumed straight and has a strong smoky flavour.':
+		       '';
+
 	}
 }
 
