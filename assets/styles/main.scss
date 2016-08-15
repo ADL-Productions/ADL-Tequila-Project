@@ -703,20 +703,20 @@ footer a {
 		width: 100%;
 	}
 
-	.cf {
-		width: 100%;
-		*zoom: 1;
-	}
+	// .cf {
+	// 	width: %;
+	// 	*zoom: 1;
+	// }
 
-	.product-item.slide {
-		// width: 40%;
-		display: inline-block;
-	}
+	// .product-item.slide {
+	// 	// width: 40%;
+	// 	// display: inline-block;
+	// }
 	
-	.product.cf.is-selected {
-		width: 40%;
-		text-align: center;
-	}
+	// .product.cf.is-selected {
+	// 	width: 40%;
+	// 	text-align: center;
+	// }
 
 	.priceRangeContainer {
 		margin-left: 30px;
@@ -776,22 +776,29 @@ footer a {
 
 	.cf {
 		*zoom: 1;
-		width: 100%;
+		width: 95%;
 	}
 
-	// .product-item {
-	// 	// width: 40%;
-	// 	// float: none; /*ensuring proper layout*/
-	// }
+	.product-item {
+		// width: 100%;
+		// float: none;
+	}
 
 	#map {
 		display: none;
 	}
 }
-// @media (min-width: 0px) and (max-width: 460px) {}
 
-@media screen and (max-width: 870) {
-	#map {
-		display: none;
+@media screen and (max-width: 600px) {
+	h1 {
+		font-size: 70px;
+	}
+
+	.headKey img {
+		max-width: 75px;
+	}
+
+	.headerText h2 {
+		font-size: 35px;
 	}
 }
