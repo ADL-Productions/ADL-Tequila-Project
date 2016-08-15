@@ -65,12 +65,9 @@ a {
 p {
 	text-align: left;
 	line-height: 15px;
-	color:lighten($grey,35%);
+	color:lighten($grey,25%);
 }
 
-.logo {
-	max-width:200px;
-}
 
 // HEADER STYLES 
 
@@ -139,13 +136,16 @@ header h2 {
 	flex-direction: column;
 	width: 100%;
 	background-color: $white;
-	padding: 105px 120px 120px 120px;
+	padding: 90px 120px 100px 100px;
 	margin: 90px 0 0 0;
+	text-align: left;
 }
 
 .user-data h2 {
 	color: $brown;
-	margin-bottom: 90px;
+	letter-spacing: 1px;
+	text-align: left;
+	margin-bottom: 0px;
 }
 
 #userInputForm {
@@ -233,6 +233,7 @@ header h2 {
 #volumeRange, #dataSubmit {
 	width: 100%;
 	margin: 0;
+	z-index: 100;
 }
 
 #priceRange, #userLocation {
@@ -256,9 +257,6 @@ header h2 {
 }
 
 .feature-btn-container {
-	// display: flex;
-	// align-items: center;
-	// justify-content: center;
 	margin: 0;
 }
 
@@ -410,7 +408,6 @@ span.dollar-sign {
 	float: left; /*ensuring proper layout*/
 }
 .product-heading {
-	// font-weight: 500;
 	font-size: 25px;
 	color: #AAB2BD;
 	text-transform: uppercase;
@@ -450,21 +447,25 @@ span.dollar-sign {
 
 .product-feature {
 	display: inline-block;
-	margin: 50px auto 0;
+	margin: 50px auto 0 auto;
 	background-color: $whitesmoke;
 }
+
 .product-showcase {
 	display: flex;
-	justify-content: space-between;
+	flex-wrap: wrap;
+	justify-content: center;
 	box-shadow: 0px 2px 6px 0px rgba(204,209,217,.5);
 	margin: 41px 0 54px 0;
 }
+
 .showcaseLeft {
 	width: 33.333%;
 	border-right: solid 1px #e1e1e1;
 	background-color:$white;
 	position: relative;
 }
+
 .showcaseLeft img {
 	display: block;
 	margin: 0 auto;
@@ -473,17 +474,30 @@ span.dollar-sign {
 .showcaseMiddle {
 	width: 33.333%;
 	background-color: #fbfbfb;
-	padding: 20px 30px 30px 30px ;
+	padding: 30px 30px 30px 30px ;
 }
 
 .showcaseMiddle h2 {
+	display: inline;
 	color: $green;
+	letter-spacing: 1px;
+}
+
+.showcaseMiddle h3 {
+	font-style: italic;
+	font-size: 24px;
+	letter-spacing: 0.5px;
+}
+
+.showcaseMiddle p {
+	font-size: 16px;
+	line-height: 1.4em;
 }
 
 .showcaseRight {
 	width: 33.333%;
 	background-color: #fbfbfb;
-	padding: 20px 30px 30px 30px;
+	padding: 30px 30px 30px 30px;
 }
 
 .priceContainer {
@@ -504,15 +518,17 @@ span.dollar-sign {
 	font-size: 17px;
 }
 
+.teqCat {
+	color: lighten($green, 10%);
+	font-style: italic;
+}
+
 .feature-btn-group {
 	flex-direction: column;
 	align-items: flex-end;
-	// text-align: center; 
-	// width: 100%;
 }
 
 .feature-btn {
-	// width: 100%;
 	padding: 8px 16px;
 	letter-spacing: 2px;
 	text-transform: uppercase;
@@ -546,25 +562,51 @@ span.dollar-sign {
 
 footer {
 	color: $whitesmoke;
-	padding: 15px 0 15px 0;
+	padding: 15px 0 30px 0;
 	background-color: lighten($grey, 10%);
-	justify-content: center;
 	margin-top: 90px;
 }
 
-.footer-two h6 {
-	display: flex;
-	align-items: center;
-	margin: 0 auto;
+footer h6 {
+	margin: 15px 0;
 }
 
 footer a {
 	color: $seafoam;
 }
 
+.footerContainer {
+	align-items: baseline;
+}
+
+.footer-two h6 {
+	display: flex;
+	// align-items: center;
+	margin: 0 auto;
+}
+
+.footer-one {
+	align-items: flex-start;
+	flex-direction: column;
+}
+
+.footer-two {
+	justify-content: center;
+	align-items: center;
+}
+
 .footer-two img {
 	width: 100px;
-	padding-left: 5px;
+	padding: 3px 0 0 5px;
+}
+
+.social-media-icons {
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.social-media-icons a {
+	padding-top: 15px;
 }
 
 // FLICKITY
@@ -654,23 +696,67 @@ footer a {
 }
 
 //Queries 
-@media (min-width: 760px) and (max-width: 940px) {
+@media (min-width: 820px) and (max-width: 940px) {
+
+	.priceContainer {
+		position: absolute;
+		right: 15px;
+		top: 35px;
+	}	
+
+	.feature-btn, .feature-btn-container {
+		width: 100%;
+	}
+
 	.cf {
 		width: 45%;
 		*zoom: 1;
 		width: 45%;
 	}
+	
+	.priceRangeContainer {
+		margin-left: 30px;
+	}
+
 }
 
-@media (min-width: 480px) and (max-width: 760px) {
+@media (min-width: 480px) and (max-width: 819px) {
+
+	.user-data-one {
+		flex-direction: column;
+	}
+
+	.user-data-heads h4 {
+		margin-bottom: 0;
+	}
+
+	.priceRangeContainer, .volumeRangeContainer {
+		width: 100%;
+		margin: 15px 0;
+	}
 
 	h3.style {
 		font-size:30px;
 		line-height:40px;
 	}
 
-	p {
-		line-height:60px;
+	.showcaseLeft, .showcaseMiddle {
+		width: 50%;
+	}
+
+	.showcaseRight {
+		width: 100%;
+		border-top: 1px solid #e1e1e1;
+	}
+
+	.feature-btn-group {
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.inventory-btn {
+		margin: 0 30px 0 0;
 	}
 
 	.cf {
