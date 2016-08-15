@@ -66,11 +66,11 @@
 			</div>
 			<div class="showcaseMiddle">
 				<h2>{{name}}</h2>
+				<h3><span>&ldquo;</span>{{style}}<span>&rdquo;</span></h3>
 				<p>{{package}}</p>
 				<p>By: {{producer_name}} </p>
 				<p>Product of {{origin}}</p>
 				<p>{{tertiary_category}}</p>
-				<h3><span>&ldquo;</span>{{style}}<span>&rdquo;</span></h3>
 			</div>
 			<div class="showcaseRight">
 				<div id="map" class="map"></div>
@@ -97,7 +97,10 @@
 <!-- Beginning Wrapper -->
 	<main class="wrapper">
 		<section class="user-data flexContainer">
-			<h2>A quick search will reveal the tequila of your dreams.</h2>
+			<div class="user-data-heads">
+				<h2>A quick search will reveal the tequila of your dreams.</h2>
+				<h4>Select your bottle size, price range, and enter your address for a quick and easy selection of tequila at your nearest LCBO.</h4>
+			</div>
 			<form action="" id="userInputForm">
 
 				<div class="user-data-one flexContainer">
@@ -149,15 +152,16 @@
 <!-- Footer -->
 	<footer class="flexContainer">
 		<div class="footerContainer flexContainer wrapper">
-			<div class="footer-one">
+			<div class="footer-one flexContainer">
 				<h6>Built by <a href="http://www.danielpierre.io" target="_blank">Daniel Pierre,</a> <a href="http://www.lindsiecanton.com" target="_blank">Lindsie Canton,</a> and <a href="http://www.abenaasomaning.com" target="_blank">Abena Asomaning.</a> 	&copy; 2016 All Rights Reserved.</h6>
-			</div>
-			<div class="footer-two flexContainer">
-				<h6>Data Provided by <a href="https://lcboapi.com/" target="_blank"><img src="assets/images/lcboApiLogo.png"></a></h6>
+				<div class="footer-two flexContainer">
+					<h6>Data Provided by <a href="https://lcboapi.com/" target="_blank"></h6>
+					<img src="assets/images/lcboApiLogo.png"></a>
+				</div>
 			</div>
 			<div class="social-media-icons flexContainer">
-				<h6>Share with a friend 
-				<a href="http://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="lcbo.com"target="_blank">Tweet</a></h6>
+				<h6>Share with a friend</h6>
+				<a href="http://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="lcbo.com"target="_blank">Tweet</a>
 			</div>
 		</div>
 	</footer>
