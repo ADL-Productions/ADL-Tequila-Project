@@ -506,11 +506,11 @@ app.utils = {
 		}
 
 		string = string.toLowerCase();
-		return string === 'mixto' ? 'Mixed':
-		       string === 'blanco' ? 'White':
-		       string === 'reposado' ? 'Rested':
-		       string === 'anejo' ? 'Aged':
-		       string === 'mezcal' ? 'Oven-cooked Agave':
+		return string === 'mixto' ? '(Mixed)':
+		       string === 'blanco' ? '(White)':
+		       string === 'reposado' ? '(Rested)':
+		       string === 'anejo' ? '(Aged)':
+		       string === 'mezcal' ? '(Oven-cooked Agave)':
 		       '';
 	},
 
@@ -520,7 +520,7 @@ app.utils = {
 		}
 		
 		string = string.toLowerCase();
-		return string === 'mixto' ? 'Mixtos use a minimum of 51% blue Agave, and uses cane and other sugars to make up the remainder.':
+		return string === 'mixto'  ? 'Mixtos use a minimum of 51% blue Agave, and uses cane and other sugars to make up the remainder.':
 		       string === 'blanco' ? 'A white spirit, un-aged and bottled immediately, or aged for less than two months.':
 		       string === 'reposado' ? 'Aged between two and twelve months in oak barrels.':
 		       string === 'anejo' ? 'Aged in oak barrels between one and three years.':
