@@ -310,48 +310,42 @@ header h2 {
  }
 
 //  Flickity Gallery Cards
-html {
-  box-sizing: border-box;
-}
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
+
 .cf:before,
 .cf:after {
   display: table;
   content: ' ';
 }
+
 .cf:after {
   clear: both;
 }
+
 .cf {
 	width: 33.333%;
   *zoom: 1;
-  width: 33.3333%;
 }
+
 img {
   max-width: 100%;
   height: auto;
 }
-figure {
-  margin: 0;
-  padding: 10px;
-}
-figure a {
-  display: block;
-}
-mark {
-  padding: 0 5px;
-  background-color: #dddddd;
-}
-::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
-}
+
+// figure {
+//   margin: 0;
+//   padding: 10px;
+// }
+// figure a {
+//   display: block;
+// }
+// mark {
+//   padding: 0 5px;
+//   background-color: #dddddd;
+// }
 
 .product-summary.card {
-	width:280px;
+	// width:280px;
+	width: 100%;
 	margin: 7px;
 }
 
@@ -375,6 +369,10 @@ mark {
 	color: $grey;
 	background-color: lighten($green,20%);
 	padding:10px;
+}
+
+.product-item.slide {
+	width: 100%;
 }
 
 span.dollar-sign {
@@ -401,18 +399,21 @@ span.dollar-sign {
 }
 
 .product-item {
-	width: 33.3333%;
-	padding-right: 2%;
-	padding-left: 2%;
+	width: 30%;
+	padding-right: 5%;
+	padding-left: 5%;
 	margin-bottom: 30px;
-	float: left; /*ensuring proper layout*/
+	float: left; 
+	/*ensuring proper layout*/
 }
+
 .product-heading {
 	font-size: 25px;
 	color: #AAB2BD;
 	text-transform: uppercase;
 	text-align: center;
 }
+
 .product-info {
 	padding: 7%;
 	min-height: 140px;
@@ -519,8 +520,7 @@ span.dollar-sign {
 }
 
 .teqCat {
-	color: lighten($green, 10%);
-	font-style: italic;
+	color: lighten($brown, 6%);
 }
 
 .feature-btn-group {
@@ -581,7 +581,6 @@ footer a {
 
 .footer-two h6 {
 	display: flex;
-	// align-items: center;
 	margin: 0 auto;
 }
 
@@ -600,13 +599,12 @@ footer a {
 	padding: 3px 0 0 5px;
 }
 
-.social-media-icons {
-	flex-direction: column;
-	align-items: flex-end;
+.social-media-icons h6 {
+	padding-right: 8px;
 }
 
 .social-media-icons a {
-	padding-top: 15px;
+	padding-left: 15px;
 }
 
 // FLICKITY
@@ -636,15 +634,8 @@ footer a {
 
 // LEAFLET STUFFS
 
-#dev-map {
-	height: 300px;
-	display: none;
-}
-
 #map {
 	height: 300px;
-	// border: 1px solid black;
-	// background-color: #fff;
 }
 
 .leaflet-popup-content-wrapper,
@@ -696,7 +687,11 @@ footer a {
 }
 
 //Queries 
-@media (min-width: 820px) and (max-width: 940px) {
+@media screen and (max-width: 950px) {
+
+	.wrapper {
+	    width: 92%;
+	}
 
 	.priceContainer {
 		position: absolute;
@@ -709,18 +704,38 @@ footer a {
 	}
 
 	.cf {
-		width: 45%;
+		width: 100%;
 		*zoom: 1;
-		width: 45%;
+	}
+
+	.product-item.slide {
+		// width: 40%;
+		display: inline-block;
 	}
 	
+	.product.cf.is-selected {
+		width: 40%;
+		text-align: center;
+	}
+
 	.priceRangeContainer {
 		margin-left: 30px;
 	}
 
+	.footerContainer {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.footer-one, .social-media-icons {
+		align-items: center;
+
+	}
+
 }
 
-@media (min-width: 480px) and (max-width: 819px) {
+@media screen and (max-width: 870px) {
 
 	.user-data-one {
 		flex-direction: column;
@@ -760,9 +775,17 @@ footer a {
 	}
 
 	.cf {
-		width: 100%;
 		*zoom: 1;
 		width: 100%;
+	}
+
+	// .product-item {
+	// 	// width: 40%;
+	// 	// float: none; /*ensuring proper layout*/
+	// }
+
+	#map {
+		display: none;
 	}
 }
 // @media (min-width: 0px) and (max-width: 460px) {}
