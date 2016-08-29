@@ -19,7 +19,10 @@ body {
     color: $grey;
     font-family: 'Raleway', sans-serif;
     font-size: 17px;
-    background-color: $whitesmoke;
+    // background-color: $whitesmoke;
+    background: url("../images/hero.svg") repeat;
+    background-attachment: fixed;
+    background-color: rgba(141,222,146,0.55);
 }
 
 .wrapper {
@@ -35,11 +38,6 @@ body {
 	align-items: center;
 }
 
-h2 {
-	font-size: 30px;
-	margin: 17px 0;
-}
-
 h3 {
 	font-size: 30px;
 	padding-top:0px;
@@ -53,7 +51,7 @@ h3.style {
 }
 
 h6 {
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 400;
 }
 
@@ -72,16 +70,16 @@ p {
 // HEADER STYLES 
 
 header {
-	background: url("../images/hero.svg") repeat;
-	background-attachment: fixed;
-	background-color: rgba(141,222,146,0.4);
+	// background: url("../images/hero.svg") repeat;
+	// background-attachment: fixed;
+	// background-color: rgba(141,222,146,0.4);
 	// background-size: cover;
-	max-height: 550px;
-	height: 80vh;
+	// max-height: 550px;
+	height: 100vh;
 }
 
 .headerText {
-	padding: 120px 0;
+	padding: 160px 0;
 	flex-direction: column;
 	text-align: left;
 	align-items: flex-start;
@@ -89,15 +87,11 @@ header {
 
 h1 {
 	color: $brown;
-	font-size: 100px;
+	font-size: 125px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	line-height: 1em;
 	margin: 0;
-}
-
-header h2 {
-	color: $grey;
 }
 
 .headKey {
@@ -106,7 +100,7 @@ header h2 {
 }
 
 .headKey img {
-	max-width: 110px;
+	max-width: 120px;
 }
 
 .headKey:after {
@@ -122,29 +116,52 @@ header h2 {
 }
 
 .headerText h2 {
-	font-size: 51px;
+	color: $grey;
+	font-size: 41.7px;
 	font-weight: 400;
 	letter-spacing: 2px;
 	font-style: italic;
-	// text-transform: uppercase;
+	margin: 17px 0;
+}
+
+.headerArrow {
+	font-size: 40px;
+	margin: 90px auto 0 auto;
+	i {
+		color: darken($green, 8%);
+		transition: 0.3s ease-in-out;
+		&:hover {
+			transform: scale(1.15) translate(0, 2px);
+
+		}
+	}
 }
 
 
 // USER DATA
 
+main {
+	padding-top: 60px;
+}
+
+form h4 {
+	margin-bottom: 0;
+	text-align: center;
+}
+
 .user-data {
 	flex-direction: column;
 	width: 100%;
 	background-color: $white;
-	padding: 90px 120px 100px 100px;
-	margin: 90px 0 0 0;
+	padding: 90px 100px 100px 100px;
+	margin: 0;
 	text-align: left;
 }
 
 .user-data h2 {
 	color: $brown;
 	letter-spacing: 1px;
-	text-align: left;
+	text-align: center;
 	margin-bottom: 0px;
 }
 
@@ -154,7 +171,11 @@ header h2 {
 }
 
 .user-data-one {
-	padding-bottom: 60px;
+	padding-bottom: 30px;
+}
+
+.user-data-two {
+	align-items: flex-start;
 }
 
 .user-data-one, .user-data-two {
@@ -165,6 +186,7 @@ header h2 {
 
 .volumeRangeContainer, .submitInput, {
 	width: 30%;
+	margin-bottom: 0;
 }
 
 .submitInput input:hover {
@@ -178,13 +200,11 @@ header h2 {
 
 .volumeRangeContainer, .priceRangeContainer {
   text-align: center;
-  font-weight: bold;
-  font-size: 10em;
+  font-weight: 600;
+  // font-size: 10em;
   width: 300px; 
-  // height: 100px;
   line-height: 60px;
   margin: 40px auto;
-  letter-spacing: -.07em;
   text-shadow: white 2px 2px 2px;
 }
 
@@ -248,6 +268,7 @@ header h2 {
 .submitInput input, .feature-btn.inventory-btn, .feature-btn.buy-online-btn, button.reset {
 	height: 60px;
 	letter-spacing: 2px;
+	font-weight: 600;
 	text-transform: uppercase;
 	text-align: center;
 	color: $green;
@@ -449,7 +470,7 @@ span.dollar-sign {
 .product-feature {
 	display: inline-block;
 	margin: 50px auto 0 auto;
-	background-color: $whitesmoke;
+	// background-color: $whitesmoke;
 }
 
 .product-showcase {
@@ -491,7 +512,6 @@ span.dollar-sign {
 }
 
 .showcaseMiddle p {
-	font-size: 16px;
 	line-height: 1.4em;
 }
 
@@ -561,9 +581,9 @@ span.dollar-sign {
 // FOOTER STYLES 
 
 footer {
-	color: $whitesmoke;
+	background-color: $whitesmoke;
 	padding: 15px 0 30px 0;
-	background-color: lighten($grey, 10%);
+	color: $grey;
 	margin-top: 90px;
 }
 
@@ -572,7 +592,11 @@ footer h6 {
 }
 
 footer a {
-	color: $seafoam;
+	color: $green;
+	font-weight: 600;
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 .footerContainer {
@@ -674,15 +698,17 @@ footer a {
 	}
 }
 
-.reset {
+button.reset {
 	margin: 0 auto;
-	padding: 30px;
+	// padding: 30px;
 	width: 30%;
+	color: white;		
+	background-color: darken($green, 7%);
+	border: 4px solid darken($green, 7%);
 	transition: 0.35s ease-in-out;
-
 	&:hover {
-		background-color: $green;
-		color: white;		
+		background-color: darken($green, 14%);
+		border: 4px solid darken($green, 14%);
 	}
 }
 
@@ -737,8 +763,21 @@ footer a {
 
 @media screen and (max-width: 870px) {
 
-	.user-data-one {
+	h1 {
+		font-size: 100px;
+	}
+
+	.headKey img {
+		max-width: 100px;
+	}
+
+	.headerText h2 {
+		font-size: 32.9px;
+	}
+
+	.user-data-one, .user-data-two {
 		flex-direction: column;
+		align-items: center;
 	}
 
 	.user-data-heads h4 {
@@ -748,6 +787,20 @@ footer a {
 	.priceRangeContainer, .volumeRangeContainer {
 		width: 100%;
 		margin: 15px 0;
+	}
+
+	.textInput {
+	    width: 100%;
+	    margin-bottom: 30px;
+	}
+
+	#userLocation {
+	    padding: 16px;
+	}
+
+	.submitInput,  {
+	    width: 60%;
+	    margin-top: 30px;
 	}
 
 	h3.style {
@@ -779,26 +832,134 @@ footer a {
 		width: 95%;
 	}
 
-	.product-item {
-		// width: 100%;
-		// float: none;
-	}
-
 	#map {
 		display: none;
 	}
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
 	h1 {
-		font-size: 70px;
+		font-size: 80px;
 	}
 
 	.headKey img {
-		max-width: 75px;
+		max-width: 80px;
+	}
+
+	.headerText {
+		padding-top: 190px;
+		h2 {
+			font-size: 25.7px;
+		}
+	}
+
+	.user-data {
+		padding: 60px;
+	}
+
+	.showcaseLeft, .showcaseMiddle {
+		width: 100%;
+	}
+
+	.showcaseLeft {
+		border-right: none;
+		border-bottom: solid 1px #e1e1e1;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	
+	main {
+	    padding-top: 30px;
+	}
+
+	h1 {
+		font-size: 65px;
+	}
+
+	.headKey img {
+		max-width: 63px;
 	}
 
 	.headerText h2 {
-		font-size: 35px;
+		font-size: 22px;
+		letter-spacing: 1px;
+	}
+
+	.user-data {
+		padding: 60px 45px;
+	}
+
+	.submitInput {
+	    width: 100%;
+	}
+
+	.showcaseMiddle, .showcaseRight {
+	    padding: 20px;
+	}
+
+	.showcaseRight {
+		padding: 20px;
+	}
+
+	.inventory-btn {
+	    margin: 0 0 20px 0;
+	}
+
+	.feature-btn-group {
+	    flex-direction: column;
+	}
+
+	.flickity-page-dots {
+		display: none;
+	}
+
+	button.reset {
+	    width: 50%;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	
+	main {
+	    padding-top: 15px;
+	}
+
+	h1 {
+		font-size: 50px;
+	}
+
+	.headKey img {
+		max-width: 50px;
+	}
+
+	.headerText h2 {
+		font-size: 30px;
+		letter-spacing: 1px;
+		max-width: 300px;
+	}
+
+	.user-data {
+		padding: 30px 15px;
+	}
+
+	.user-data-heads h2 {
+		margin-top: 0;
+	}
+}
+
+@media screen and (max-width: 319px) {
+	h1 {
+		font-size: 40px;
+	}
+
+	.headKey img {
+		max-width: 40px;
+	}
+
+	.headerText h2 {
+		font-size: 25px;
+		// letter-spacing: 1px;
+		max-width: 250px;
 	}
 }
