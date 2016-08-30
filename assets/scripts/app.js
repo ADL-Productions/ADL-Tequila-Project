@@ -29,19 +29,12 @@ app.getUserInput = function() {
 		// Remove any existent product cards
 		$('.product.cf').remove();
 
-// console.log('isFlickity? (submit)', app.isFlickity);
-
 		// Convert price and volume values to ranges
 		priceRange  = app.utils.getPriceRange(Number(priceRange));
 		volumeRange = app.utils.getVolumeRange(Number(volumeRange));
 
 		// Get products matching user search
 		app.getProductRange(priceRange, volumeRange, userLocation);
-
-		// Scroll to the product feature section
-		$('html, body').animate({
-			scrollTop: $('.product-cards').offset().top - 20
-		}, 750);
 	});
 }
 
@@ -63,8 +56,6 @@ app.getProductRange = function(priceRange, volumeRange, userLocation) {
 			order: 'price_in_cents.asc'
 		}
 	}).then(function(data) {
-
-// console.log('data - sorted by price', data);
 
 		// Filter by categories, user selected price and volume ranges
 		var products = data.result.filter(function(obj) {
@@ -88,9 +79,6 @@ app.getProductRange = function(priceRange, volumeRange, userLocation) {
 			product.type_description  = app.utils.describeCategory(product.tertiary_category);
 			product.tertiary_category = app.utils.filterCategory(product.tertiary_category);
 		});
-
-console.log('products', products);
-console.log('no of products', products.length);
 
 		// Display products on the page in a carousel
 		// Initialize the template
@@ -118,8 +106,6 @@ console.log('no of products', products.length);
 			app.isFlickity = !app.isFlickity;
 		}
 
-// console.log('isFlickity? (cards)', app.isFlickity);		
-
 		//--- DISPLAY RANDOM PRODUCT IN SHOWCASE SECTION ----------------------
 
 		// Get a randomly selected product to display in the feature section
@@ -137,7 +123,13 @@ console.log('no of products', products.length);
 		// Append the template to its container
 		$('#productFeature')
 			.empty()
-			.append(filledFeatureTemplate);
+			.append(filledFeatureTemplate).queue(function() {
+				// Scroll to the product feature section
+				$('html, body').animate({
+					scrollTop: $('.product-cards').offset().top - 20
+				}, 750);
+				$(this).dequeue();
+			});
 
 		//--- DISPLAY USER-SELECTED PRODUCT IN SHOWCASE SECTION ---------------
 
@@ -151,11 +143,6 @@ console.log('no of products', products.length);
 			var selectedProduct = products.filter(function(product) {
 				return product.id === userSelection;
 			})[0];
-
-console.log('selectedProduct', selectedProduct);
-console.log('url', selectedProduct.image_thumb_url);
-console.log('name', selectedProduct.name);
-console.log('lcbo url', app.utils.getProductUrl(selectedProduct.name, selectedProduct.id));
 
 			// Initialize the feature template
 			// var featureTemplate = $('#productFeatureTemplate').html();
@@ -206,9 +193,6 @@ console.log('lcbo url', app.utils.getProductUrl(selectedProduct.name, selectedPr
 // Get a count of the number of response pages at the inventories endpoint
 app.countProductAvailabilityPages = function(selectedProduct, products, userLocation) {
 
-
-// console.log('product ID', selectedProduct.id);
-
 	$.ajax({
 		url: app.lcboApiUrl + 'inventories',
 		dataType: 'json',
@@ -223,12 +207,8 @@ app.countProductAvailabilityPages = function(selectedProduct, products, userLoca
 		}
 	}).then(function(data) {
 
-// console.info('inventory data', data);
-
 		// Count the total number of results pages
 		var dataPages = data.pager.total_pages;
-
-// console.log('total_pages', data.pager.total_pages);
 
 		// If there are multiple pages, use multiple requests to page results
 		// Otherwise, use the results from the current page
@@ -245,11 +225,6 @@ app.countProductAvailabilityPages = function(selectedProduct, products, userLoca
 
 // Make a request for each response page at the inventories endpoint, when necessary
 app.getProductAvailability = function(dataPages, selectedProduct, products, userLocation) {
-
-// console.info('dataPages', dataPages);	
-// console.info('selectedProduct', selectedProduct);	
-// console.info('products', products);	
-// console.info('userLocation', userLocation);	
 
 	// Add page numbers to an array
 	var pages = [];
@@ -298,11 +273,6 @@ app.getProductAvailability = function(dataPages, selectedProduct, products, user
 // Get a count of the number of response pages at the stores endpoint
 app.getStoreLocations = function(inventories, selectedProduct, product, userLocation) {
 
-// console.info('inventories', inventories);
-// console.info('selectedProduct', selectedProduct);
-// console.info('product', product);
-// console.info('userLocation', userLocation);
-
 	$.ajax({
 		url: app.lcboApiUrl + 'stores',
 		dataType: 'json',
@@ -316,8 +286,6 @@ app.getStoreLocations = function(inventories, selectedProduct, product, userLoca
 			distance_in_meters: 5000
 		}
 	}).then(function(data) {
-
-// console.log('store data', data);
 
 		// Get the array of stores
 		var stores = data.result;
@@ -333,8 +301,6 @@ app.getStoreLocations = function(inventories, selectedProduct, product, userLoca
 				}
 			} 
 		});
-
-console.info('stores', stores);
 
 		// Map the stores that stock the selected product
 		app.plotInventoryMap(stores);
@@ -547,7 +513,6 @@ $(function() {
 });
 
 app.init = function() {
-	// console.log('api key >>>', app.lcboApiKey);
 	app.getUserInput();
 	app.reset();
 };
